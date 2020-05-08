@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+cd $(dirname $0)/..
+
+$(aws ecr get-login --no-include-email)
+
+auto/package
+DOCKER_TAG="$(< target/docker-image.txt)"
+
+docker push "$DOCKER_TAG"

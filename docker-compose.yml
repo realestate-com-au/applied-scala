@@ -1,0 +1,42 @@
+version: "2"
+
+services:
+  dev:
+    build: support/dev
+    working_dir: /work
+    command: support/dev/run
+    environment:
+      PORT: 9200
+      OMDB_API_KEY: 7f9b5b06
+      DATABASE_HOST: database
+      DATABASE_NAME: moviedb
+      DATABASE_USERNAME: moviedb
+      DATABASE_PASSWORD: moviedb
+    ports:
+      - "9200:9200"
+    volumes:
+      - .:/work
+      - ivy-cache:/root/.ivy2
+      - docker-scala-sbt-cache:/root/.sbt
+      - docker-scala-sbt-coursier-cache:/root/.cache/coursier
+    depends_on:
+      - database
+
+  database:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: moviedb
+      POSTGRES_PASSWORD: moviedb
+      POSTGRES_DB: moviedb
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+
+volumes:
+  ivy-cache:
+    external: true
+  docker-scala-sbt-cache:
+    external: true
+  docker-scala-sbt-coursier-cache:
+    external: true
