@@ -1,0 +1,5 @@
+#!/bin/sh
+
+exec java \
+  -javaagent:newrelic.jar \
+  -jar app.jar
