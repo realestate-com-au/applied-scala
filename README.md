@@ -1,5 +1,7 @@
 # applied-scala
 
+[![Build Status](https://travis-ci.org/realestate-com-au/applied-scala.svg?branch=master)](https://travis-ci.org/github/realestate-com-au/applied-scala)
+
 ## Getting Started
 
 Similar to [Intro to Scala](https://github.com/wjlow/intro-to-scala#pre-requisites)
