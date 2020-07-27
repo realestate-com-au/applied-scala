@@ -2,7 +2,6 @@ package com.reagroup.exercises.circe
 
 import io.circe.Decoder.Result
 import io.circe._
-import io.circe.generic.semiauto.deriveEncoder
 import io.circe.syntax._
 
 /**
@@ -30,7 +29,6 @@ object CirceExercises {
     * Why is the return type an `Either`?
     */
   def strToJson(str: String): Either[ParsingFailure, Json] = {
-    import io.circe.parser._
     ???
   }
 
@@ -75,17 +73,6 @@ object CirceExercises {
       override def apply(person: Person): Json = ???
     }
     person.asJson(???)
-  }
-
-  /**
-    * There is an alternate way to construct an `Encoder` instance,
-    * by using `Encoder.forProduct2`.
-    *
-    * This may sometimes be simpler than using `Json.obj`.
-    */
-  def encodePersonAgain(person: Person): Json = {
-    implicit val personEncoder: Encoder[Person] = ???
-    person.asJson
   }
 
   /**
@@ -154,16 +141,8 @@ object CirceExercises {
   }
 
   /**
-    * Use `Decoder.forProduct2` to construct a `Decoder` instance
-    * for `Person`.
-    */
-  def decodePersonAgain(json: Json): Either[DecodingFailure, Person] = {
-    implicit val personDecoder: Decoder[Person] = ???
-
-    json.as[Person]
-  }
-
-  /**
+    * You can use "semiauto derivation" for decoders too.
+    *
     * Hint: Use deriveDecoder
     */
   def decodePersonSemiAuto(json: Json): Either[DecodingFailure, Person] = {
@@ -180,12 +159,11 @@ object CirceExercises {
     * Hint: Use `decode`, which does both at the same time.
     */
   def strToPerson(str: String): Either[Error, Person] = {
-    import io.circe.parser._
     import io.circe.generic.semiauto._
 
     implicit val personDecoder: Decoder[Person] = ???
 
-    decode[Person](str)
+    parser.decode[Person](str)
   }
 
 }

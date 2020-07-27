@@ -47,18 +47,6 @@ class CirceExercisesSpec extends Specification {
 
   }
 
-  "encodePersonAgain" should {
-
-    "convert Person to Json" in {
-      val person = Person("scala", 20)
-      val actual = encodePersonAgain(person)
-      val expected = Json.obj("name" -> "scala".asJson, "age" -> 20.asJson)
-
-      actual must_=== expected
-    }
-
-  }
-
   "encodePersonSemiAuto" should {
 
     "convert Person to Json" in {
@@ -101,24 +89,6 @@ class CirceExercisesSpec extends Specification {
     "convert invalid Json to error" in {
       val json = Json.obj("foo" -> "bar".asJson)
       val errOrPerson = decodePerson(json)
-
-      errOrPerson.isLeft
-    }
-
-  }
-
-  "decodePersonAgain" should {
-
-    "convert valid Json to Person" in {
-      val json = Json.obj("name" -> "scala".asJson, "age" -> 20.asJson)
-      val errOrPerson = decodePersonAgain(json)
-
-      errOrPerson must_=== Right(Person("scala", 20))
-    }
-
-    "convert invalid Json to error" in {
-      val json = Json.obj("foo" -> "bar".asJson)
-      val errOrPerson = decodePersonAgain(json)
 
       errOrPerson.isLeft
     }
