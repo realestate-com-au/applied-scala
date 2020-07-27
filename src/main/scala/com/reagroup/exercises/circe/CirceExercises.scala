@@ -51,6 +51,8 @@ object CirceExercises {
 
   /**
     * Defining encoders and decoders in the companion object means that Scala will always be able to find them.
+    *
+    * Note: they may be "shadowed" by a higher priority implicit
     */
   case object Person {
 
@@ -59,6 +61,15 @@ object CirceExercises {
       *
       * Make `personEncoder` an `implicit` to avoid having to pass the `Encoder` instance
       * into `asJson` explicitly.
+      *
+      * Bonus content (if you have time):
+      *
+      * You can read the code below as "Person is an instance of the Encoder type class"
+      *
+      * More info on type classes:
+      *
+      * - https://typelevel.org/cats/typeclasses.html
+      * - https://www.parsonsmatt.org/2017/01/07/how_do_type_classes_differ_from_interfaces.html
       */
     implicit val personEncoder: Encoder[Person] = (p: Person) => {
       ???
