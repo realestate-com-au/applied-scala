@@ -23,29 +23,14 @@ object CirceExercises {
 
   /**
     * Json Parsing
-    */
-
-  /**
+    *
+    * Hint: `parser` is already in scope (imported through `io.circe._`)
+    *
     * Why is the return type an `Either`?
     */
   def strToJson(str: String): Either[ParsingFailure, Json] = {
     ???
   }
-
-  case class Person(name: String, age: Int)
-
-  /**
-    * Encoding
-    *
-    * Hint: Use `Json.obj()`
-    * Hint: Use `.asJson` to convert Scala standard types to Json
-    *
-    * For more comprehensive examples:
-    * https://circe.github.io/circe/codecs/custom-codecs.html
-    */
-
-  def personToJson(person: Person): Json =
-    ???
 
   /**
     * Try make a syntax error in the following Json document and compile.
@@ -62,16 +47,52 @@ object CirceExercises {
     """
   }
 
+  case class Person(name: String, age: Int)
+
   /**
-    * Create an `Encoder` instance for `Person` by implementing the `apply` method below.
+    * Defining encoders and decoders in the companion object means that Scala will always be able to find them.
+    */
+  case object Person {
+
+    /**
+      * Create an `Encoder` instance for `Person` by implementing the `apply` method below.
+      *
+      * Make `personEncoder` an `implicit` to avoid having to pass the `Encoder` instance
+      * into `asJson` explicitly.
+      */
+    implicit val personEncoder: Encoder[Person] = (p: Person) => {
+      ???
+    }
+
+    /**
+      * Sometimes you might want several encoders for the same type.
+      *
+      * Why can't we define this as implicit as well? How would Scala know which one to pick?
+      */
+    val differentPersonEncoder: Encoder[Person] = (p: Person) => {
+      Json.obj(
+        "different_name" -> p.name.asJson,
+        "different_age" -> p.age.asJson
+      )
+    }
+  }
+
+  /**
+    * Scala will look for an implicit `Encoder[Person]` in the following places:
     *
-    * Make `personEncoder` an `implicit` to avoid having to pass the `Encoder` instance
-    * into `asJson` explicitly.
+    * - The current scope (current method, class, file)
+    * - Imports
+    * - The companion object of `Encoder`
+    * - The companion object of `Person` (bingo!)
     */
   def encodePerson(person: Person): Json = {
-    val personEncoder: Encoder[Person] = new Encoder[Person] {
-      override def apply(person: Person): Json = ???
-    }
+    person.asJson
+  }
+
+  /**
+    * Use `differentPersonEncoder` explicitly to encode the person
+    */
+  def encodePersonDifferently(person: Person): Json = {
     person.asJson(???)
   }
 
@@ -99,10 +120,15 @@ object CirceExercises {
     */
 
   /**
-    * 1. Why is the return type an `Either`?
+    * Remember: `Result[A]` is an alias for `Either[DecodingFailure, A]`
     *
-    * 2. Use the provided `HCursor` to navigate through the `Json`, and try to
-    *    create an instance of `Person`.
+    * Question: Why is the return type an `Either`?
+    *
+    * Construct a `Decoder` instance for `Person`, that uses the `HCursor` to
+    * navigate through the `Json`.
+    *
+    * Use the provided `HCursor` to navigate through the `Json`, and try to
+    * create an instance of `Person`.
     *
     * Hint: Use `cursor.downField("name")` to navigate to the `"name"` field.
     * `cursor.downField("name").as[String]` will navigate to the `"name"` field
@@ -114,17 +140,6 @@ object CirceExercises {
     *
     * For more comprehensive cursor docs:
     * https://circe.github.io/circe/api/io/circe/HCursor.html
-    */
-  def jsonToPerson(json: Json): Either[DecodingFailure, Person] = {
-    val cursor = json.hcursor
-    ???
-  }
-
-  /**
-    * Construct a `Decoder` instance for `Person`, that uses the `HCursor` to
-    * navigate through the `Json`.
-    *
-    * Note: Result[A] is an alias for Either[DecodingFailure, A].
     *
     * For more comprehensive examples:
     * https://circe.github.io/circe/codecs/custom-codecs.html
@@ -135,6 +150,9 @@ object CirceExercises {
     implicit val personDecoder: Decoder[Person] = new Decoder[Person] {
       override def apply(cursor: HCursor): Result[Person] = ???
     }
+    // note: a lot of boilerplate can be removed. Try pressing alt-enter with your
+    // cursor over "new Decoder[Person]" above. This works because Decoder is a trait with
+    // a single abstract method.
 
     // This says "Turn this Json to a Person"
     json.as[Person]
@@ -156,14 +174,14 @@ object CirceExercises {
   /**
     * Parse and then decode
     *
-    * Hint: Use `decode`, which does both at the same time.
+    * Hint: Use `parser.decode`, which does both at the same time.
     */
   def strToPerson(str: String): Either[Error, Person] = {
     import io.circe.generic.semiauto._
 
     implicit val personDecoder: Decoder[Person] = ???
 
-    parser.decode[Person](str)
+    ???
   }
 
 }
