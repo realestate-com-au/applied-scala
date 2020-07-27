@@ -9,15 +9,16 @@ Similar to [Intro to Scala](https://github.com/wjlow/intro-to-scala#pre-requisit
 1. Skip this step if you have already done Intro to Scala on your current machine. If you're going to use [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (Community edition is fine), you need to install Java 8 even if you have a newer version of Java installed.
 
 ```
-brew tap caskroom/versions
-brew cask install caskroom/versions/adoptopenjdk8
+brew tap homebrew/cask-versions
+brew cask install homebrew/cask-versions/adoptopenjdk8
 ```
 
 2. Before the course, please run the following:
 
 ```
 git clone git@github.com:realestate-com-au/applied-scala.git
-./auto/test 
+cd applied-scala
+./auto/test
 ./auto/start-local
 ```
 
@@ -42,7 +43,7 @@ Using Docker
 
 or
 
-Using portable SBT 
+Using portable SBT
 ```
 ./sbt
 ```
@@ -67,7 +68,7 @@ Using portable SBT
 - Http4s overview + Endpoint 1: Hello World
 - Circe Exercises
 - [Code walkthrough: GET all movies (no exercises)](./src/main/scala/com/reagroup/appliedscala/urls/fetchallmovies/README.md) - [Endpoint 2: GET movie](./src/main/scala/com/reagroup/appliedscala/urls/fetchmovie/README.md) |
-- [Endpoint 3: GET movie?enriched=true](./src/main/scala/com/reagroup/appliedscala/urls/fetchenrichedmovie/README.md) 
+- [Endpoint 3: GET movie?enriched=true](./src/main/scala/com/reagroup/appliedscala/urls/fetchenrichedmovie/README.md)
 
 ### Day 2
 
