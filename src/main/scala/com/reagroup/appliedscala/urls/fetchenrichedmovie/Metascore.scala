@@ -1,6 +1,7 @@
 package com.reagroup.appliedscala.urls.fetchenrichedmovie
 
 import io.circe.Decoder.Result
+import io.circe.syntax._
 import io.circe.{Decoder, DecodingFailure, Encoder, HCursor}
 import io.circe.generic.semiauto._
 
@@ -25,5 +26,10 @@ object Metascore {
     *
     * `Metascore(75)`
     */
+  implicit val decoder: Decoder[Metascore] = Decoder.instance(cursor => for {
+    value <- cursor.get[Int]("Metascore")
+  } yield Metascore(value))
+
+  implicit val encoder: Encoder[Metascore] = Encoder.instance(metascore => metascore.value.asJson)
 
 }

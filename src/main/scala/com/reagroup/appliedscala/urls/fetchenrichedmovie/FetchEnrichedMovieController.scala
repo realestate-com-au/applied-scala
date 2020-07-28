@@ -18,12 +18,12 @@ class FetchEnrichedMovieController(fetchEnrichedMovie: MovieId => IO[Option[Enri
     * Hint: Refer to `FetchMovieController` if you're stuck.
     */
   def fetch(movieId: Long): IO[Response[IO]] = {
-    val id: MovieId = ???
+    val id: MovieId = MovieId(movieId)
 
     fetchEnrichedMovie(id).attempt.flatMap {
-      case Left(error) => ???
-      case Right(Some(enrichedMovie)) => ???
-      case Right(None) => ???
+      case Left(error) => ErrorHandler(error)
+      case Right(Some(enrichedMovie)) => Ok(enrichedMovie)
+      case Right(None) => NotFound()
     }
 
   }

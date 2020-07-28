@@ -35,5 +35,13 @@ object EnrichedMovie {
     *
     * Hint: You will need to create a custom encoder (you can use .forProduct).
     */
+  implicit val encoder: Encoder[EnrichedMovie] = Encoder.instance(enrichedMovie => {
+    Json.obj(
+      "name" := enrichedMovie.movie.name,
+      "synopsis" := enrichedMovie.movie.synopsis,
+      "reviews" := enrichedMovie.movie.reviews,
+      "metascore" := enrichedMovie.metascore
+    )
+  })
 
 }
