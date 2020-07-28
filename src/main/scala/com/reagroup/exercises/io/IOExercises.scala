@@ -20,8 +20,7 @@ object IOExercises {
     *
     * Hint: You want to look for a function in IO with the type signature A => IO[A]
     */
-  def immediatelyExecutingIO(): IO[Int] =
-    ???
+  def immediatelyExecutingIO(): IO[Int] = IO.pure(43)
 
   /**
     * Create an IO which when executed logs “hello world” (using `logger`)
@@ -34,8 +33,7 @@ object IOExercises {
     * Note: By "injecting" `logger` as a dependency to this function, we are able to use a test logger in our unit test
     * instead of relying on a mocking framework.
     */
-  def helloWorld(logger: String => Unit): IO[Unit] =
-    ???
+  def helloWorld(logger: String => Unit): IO[Unit] = IO(logger("hello world"))
 
   /**
     * Difference between `IO.apply` and `IO.pure`:
@@ -57,8 +55,7 @@ object IOExercises {
     *
     * Hint: https://typelevel.org/cats-effect/datatypes/io.html#raiseerror
     */
-  def alwaysFailingTask(): IO[Unit] =
-    ???
+  def alwaysFailingTask(): IO[Unit] = IO.raiseError(new Exception)
 
   /**
     * This is a data type that represents an exception in our program.
@@ -71,8 +68,10 @@ object IOExercises {
     *
     * If `msg` is not empty, log out the message using the `logger`
     */
-  def logMessageOrFailIfEmpty(msg: String, logger: String => Unit): IO[Unit] =
-    ???
+  def logMessageOrFailIfEmpty(msg: String, logger: String => Unit): IO[Unit] = {
+    if (msg.isEmpty) IO.raiseError(AppException("Log must not be empty"))
+    else IO(logger(msg))
+  }
 
   /**
     * We're going to work with temperature next. We start off by creating tiny types for `Fahrenheit` and `Celsius`.
@@ -91,8 +90,10 @@ object IOExercises {
     * Create an IO which gets the current temperature in Celsius and if successful, converts it to Fahrenheit
     * using `cToF` defined above.
     */
-  def getCurrentTempInF(getCurrentTemp: IO[Celsius]): IO[Fahrenheit] =
-    ???
+  def getCurrentTempInF(getCurrentTemp: IO[Celsius]): IO[Fahrenheit] = {
+    val ioOfF: IO[Fahrenheit] = getCurrentTemp.map(celsius => cToF(celsius))
+    ioOfF
+  }
 
   /**
     * Suppose the Celsius to Fahrenheit conversion is complex so we have decided to refactor it out to a remote
@@ -104,8 +105,9 @@ object IOExercises {
     * Again, our remote service call is passed in as an input argument so we can easily unit test this function
     * without the need for a mocking framework.
     */
-  def getCurrentTempInFAgain(getCurrentTemp: IO[Celsius], converter: Celsius => IO[Fahrenheit]): IO[Fahrenheit] =
-    ???
+  def getCurrentTempInFAgain(getCurrentTemp: IO[Celsius], converter: Celsius => IO[Fahrenheit]): IO[Fahrenheit] = {
+    getCurrentTemp.flatMap(converter)
+  }
 
 
   /**
@@ -122,8 +124,12 @@ object IOExercises {
     *
     * Hint: https://typelevel.org/cats-effect/datatypes/io.html#attempt
     */
-  def showCurrentTempInF(currentTemp: IO[Celsius], converter: Celsius => IO[Fahrenheit]): IO[String] =
-    ???
+  def showCurrentTempInF(currentTemp: IO[Celsius], converter: Celsius => IO[Fahrenheit]): IO[String] = {
+    currentTemp.flatMap(converter).attempt.map {
+      case Left(e) => e.getMessage
+      case Right(temp) => s"The temperature is ${temp.value}"
+    }
+  }
 
   /**
     * `UsernameError` and `Username` are tiny types we are going to use for the next exercise.
@@ -141,8 +147,12 @@ object IOExercises {
   /**
     * Use `mkUsername` to create a `Username` and if successful print the username, otherwise fail with a UsernameError.
     */
-  def mkUsernameThenPrint(username: String, logger: String => Unit): IO[Unit] =
-    ???
+  def mkUsernameThenPrint(username: String, logger: String => Unit): IO[Unit] = {
+    mkUsername(username) match {
+      case Left(e) => IO.raiseError(e)
+      case Right(username) => IO(logger(username.value))
+    }
+  }
 
 
   /**
@@ -154,11 +164,12 @@ object IOExercises {
     * > executing step 2
     * > executing step 3
     */
-  def explain(logger: String => Unit): IO[Unit] = {
-    IO(logger("executing step 1"))
-    IO(logger("executing step 2"))
-    IO(logger("executing step 3"))
-  }
+  def explain(logger: String => Unit): IO[Unit] =
+  for {
+    _ <- IO(logger("executing step 1"))
+    _ <- IO(logger("executing step 2"))
+    _ <- IO(logger("executing step 3"))
+  } yield ()
 
   /**
     * Finally, we want to learn how to execute an IO. We are not going to need to do this when writing a REST API however,
@@ -166,7 +177,6 @@ object IOExercises {
     *
     * Hint: https://typelevel.org/cats-effect/datatypes/io.html#unsaferunsync
     */
-  def execute[A](io: IO[A]): A =
-    ???
+  def execute[A](io: IO[A]): A = io.unsafeRunSync()
 
 }
