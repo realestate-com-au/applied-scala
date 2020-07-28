@@ -32,8 +32,14 @@ class AppRuntime(config: Config, httpClient: Client[IO], contextShift: ContextSh
     new FetchAllMoviesController(fetchAllMoviesService.fetchAll)
   }
 
+  private val fetchMovieController: FetchMovieController = {
+    val fetchMovieService: FetchMovieService = new FetchMovieService((pgsqlRepo.fetchMovie))
+    new FetchMovieController(fetchMovieService.fetch)
+  }
+
   private val appRoutes = new AppRoutes(
     fetchAllMoviesHandler = fetchAllMoviesController.fetchAll,
+    fetchMovieHandler = fetchMovieController.fetch,
     saveMovieHandler = _ => IO(Response[IO](status = Status.NotImplemented))
   )
 
