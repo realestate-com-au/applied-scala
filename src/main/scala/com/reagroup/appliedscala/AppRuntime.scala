@@ -48,10 +48,16 @@ class AppRuntime(config: Config, httpClient: Client[IO], contextShift: ContextSh
     new SaveMovieController(saveReviewService.save)
   }
 
+  private val saveReviewController: SaveReviewController = {
+    val saveReviewService: SaveReviewService = new SaveReviewService(pgsqlRepo.saveReview, pgsqlRepo.fetchMovie)
+    new SaveReviewController(saveReviewService.save)
+  }
+
   private val appRoutes = new AppRoutes(
     fetchAllMoviesHandler = fetchAllMoviesController.fetchAll,
     fetchMovieHandler = fetchMovieController.fetch,
     fetchEnrichedMovieHandler = fetchEnrichedMovieController.fetch,
+    saveReviewHandler = saveReviewController.save,
     saveMovieHandler = saveMovieController.save
   )
 

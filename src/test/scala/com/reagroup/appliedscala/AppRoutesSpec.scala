@@ -24,7 +24,7 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
     fetchMovieHandler = fetchMovie,
     fetchEnrichedMovieHandler = fetchEnrichedMovie,
     saveMovieHandler = saveMovie,
-//    saveReviewHandler = saveReview
+    saveReviewHandler = saveReview
   )
 
   /*
