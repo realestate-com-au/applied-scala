@@ -18,4 +18,6 @@ object MovieId {
     *
     * Hint: You don't want to use `deriveEncoder` here
     */
+
+ implicit val encoder: Encoder[MovieId] = Encoder(movieId => Json.obj(("id", Json.fromLong(movieId.value))))
 }

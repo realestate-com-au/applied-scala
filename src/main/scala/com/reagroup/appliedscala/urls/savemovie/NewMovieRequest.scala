@@ -17,5 +17,6 @@ object NewMovieRequest {
     *
     * Hint: The keys in the JSON are named exactly the same as the fields in `NewMovieRequest`.
     */
+  implicit val decoder: Decoder[NewMovieRequest] = deriveDecoder
 
 }
