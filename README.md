@@ -67,7 +67,8 @@ Using portable SBT
 - IO Exercises
 - Http4s overview + Endpoint 1: Hello World
 - Circe Exercises
-- [Code walkthrough: GET all movies (no exercises)](./src/main/scala/com/reagroup/appliedscala/urls/fetchallmovies/README.md) - [Endpoint 2: GET movie](./src/main/scala/com/reagroup/appliedscala/urls/fetchmovie/README.md) |
+- [Code walkthrough: GET all movies (no exercises)](./src/main/scala/com/reagroup/appliedscala/urls/fetchallmovies/README.md) 
+- [Endpoint 2: GET movie](./src/main/scala/com/reagroup/appliedscala/urls/fetchmovie/README.md) |
 - [Endpoint 3: GET movie?enriched=true](./src/main/scala/com/reagroup/appliedscala/urls/fetchenrichedmovie/README.md)
 
 ### Day 2
