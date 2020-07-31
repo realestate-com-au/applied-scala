@@ -21,7 +21,7 @@ class AppRuntime(config: Config, httpClient: Client[IO], contextShift: ContextSh
   /**
     * This is the repository that talks to Postgresql
     */
-  private val pgsqlRepo = PostgresqlRepository(config.databaseConfig)
+  private val pgsqlRepo = PostgresqlRepository(config.databaseConfig, contextShift)
 
   /**
     * This is where we instantiate our `Service` and `Controller` for each endpoint.

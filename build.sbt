@@ -2,17 +2,16 @@ name := "applied-scala"
 
 version := "1.0"
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.1"
 
 mainClass := Some("com.reagroup.appliedscala.Main")
 
-val catsVersion = "1.6.0"
-val circeVersion = "0.11.1"
-val http4sVersion = "0.20.1"
+val catsVersion = "2.1.1"
+val circeVersion = "0.13.0"
+val http4sVersion = "0.21.6"
 val postgresqlVersion = "42.2.4"
-val doobieVersion = "0.5.3"
-val specs2Version = "4.5.1"
-val newrelicVersion = "5.0.0"
+val doobieVersion = "0.8.8"
+val specs2Version = "4.10.1"
 
 libraryDependencies ++= Seq(
   "io.circe" %% "circe-core",
@@ -33,7 +32,6 @@ libraryDependencies ++= Seq(
   "org.postgresql"           % "postgresql"             % postgresqlVersion,
   "org.tpolecat"            %% "doobie-core"            % doobieVersion,
   "org.tpolecat"            %% "doobie-postgres"        % doobieVersion,
-  "com.newrelic.agent.java"  % "newrelic-api"           % newrelicVersion,
   "org.specs2"              %% "specs2-core"            % specs2Version % "test",
   "org.specs2"              %% "specs2-matcher-extra"   % specs2Version % "test",
   "org.specs2"              %% "specs2-scalacheck"      % specs2Version % "test",
@@ -46,8 +44,7 @@ scalacOptions ++= Seq(
   "-feature",
   "-Ywarn-numeric-widen",
   "-Ywarn-value-discard",
-  "-language:higherKinds",
-  "-Ypartial-unification"
+  "-language:higherKinds"
 )
 
 testFrameworks := Seq(TestFrameworks.Specs2)
