@@ -4,7 +4,7 @@ services:
   dev:
     image: hseeberger/scala-sbt:11.0.7_1.3.13_2.13.3
     working_dir: /work
-    command: support/dev/run
+    command: sbt run
     environment:
       PORT: 9200
       OMDB_API_KEY: 7f9b5b06
