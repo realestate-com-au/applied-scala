@@ -18,6 +18,7 @@ services:
       - .:/work
       - coursier-cache:/root/.cache/coursier
       - docker-scala-sbt-cache:/root/.sbt
+      - ivy-cache:/root/.ivy2
     depends_on:
       - database
 
@@ -36,4 +37,6 @@ volumes:
   coursier-cache:
     external: true
   docker-scala-sbt-cache:
+    external: true
+  ivy-cache:
     external: true
