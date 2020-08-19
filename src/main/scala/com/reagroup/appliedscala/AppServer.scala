@@ -9,7 +9,7 @@ class AppServer(port: Int, service: HttpApp[IO]) {
 
   @SuppressWarnings(Array("org.wartremover.warts.ImplicitParameter"))
   def start()(implicit contextShift: ContextShift[IO], timer: Timer[IO]): IO[ExitCode] = {
-    BlazeServerBuilder[IO]
+    BlazeServerBuilder[IO](scala.concurrent.ExecutionContext.global)
       .bindHttp(port, "0.0.0.0")
       .withHttpApp(service)
       .serve

@@ -10,7 +10,7 @@ class IOExercisesSpec extends Specification {
     "return an IO that would return number 43" in {
       val result = immediatelyExecutingIO()
 
-      result.unsafeRunSync === 43
+      result.unsafeRunSync() === 43
     }
   }
 
@@ -26,14 +26,14 @@ class IOExercisesSpec extends Specification {
       val logger = new TestLogger
       val result = helloWorld(logger)
 
-      result.unsafeRunSync
+      result.unsafeRunSync()
       logger.loggedMessages.toList === List("hello world")
     }
   }
 
   "alwaysFailingTask" should {
     "return an IO containing an Exception" in {
-      alwaysFailingTask().attempt.unsafeRunSync match {
+      alwaysFailingTask().attempt.unsafeRunSync() match {
         case Left(_: Exception) => ok
         case otherwise => ko(s"Expected a Left(Exception()) but received a $otherwise")
       }
@@ -48,7 +48,7 @@ class IOExercisesSpec extends Specification {
       val program = logMessageOrFailIfEmpty(msg, logger)
       logger.loggedMessages === List.empty
 
-      program.unsafeRunSync
+      program.unsafeRunSync()
 
       logger.loggedMessages.toList === List(msg)
 
@@ -57,7 +57,7 @@ class IOExercisesSpec extends Specification {
     "return AppException if `msg` is empty" in {
       val logger = new TestLogger
       val msg = ""
-      val result = logMessageOrFailIfEmpty(msg, logger).attempt.unsafeRunSync
+      val result = logMessageOrFailIfEmpty(msg, logger).attempt.unsafeRunSync()
 
       result === Left(AppException("Log must not be empty")) && logger.loggedMessages.toList === List()
     }
@@ -66,7 +66,7 @@ class IOExercisesSpec extends Specification {
   "getCurrentTempInF" should {
     "convert the current temperature to Fahrenheit" in {
       val currentTemp = IO.pure(Celsius(100))
-      val result = getCurrentTempInF(currentTemp).unsafeRunSync
+      val result = getCurrentTempInF(currentTemp).unsafeRunSync()
 
       result === Fahrenheit(212)
     }
@@ -77,7 +77,7 @@ class IOExercisesSpec extends Specification {
       val currentTemp = IO.pure(Celsius(100))
       val converter = (c: Celsius) => IO(Fahrenheit(c.value * 9 / 5 + 32)
       )
-      val result = getCurrentTempInFAgain(currentTemp, converter).unsafeRunSync
+      val result = getCurrentTempInFAgain(currentTemp, converter).unsafeRunSync()
 
       result === Fahrenheit(212)
     }
@@ -87,7 +87,7 @@ class IOExercisesSpec extends Specification {
     "return the current temperature in a sentence" in {
       val currentTemp = IO.pure(Celsius(100))
       val converter = (c: Celsius) => IO(Fahrenheit(c.value * 9 / 5 + 32))
-      val result = showCurrentTempInF(currentTemp, converter).unsafeRunSync
+      val result = showCurrentTempInF(currentTemp, converter).unsafeRunSync()
 
       result === "The temperature is 212"
     }
@@ -96,7 +96,7 @@ class IOExercisesSpec extends Specification {
       val currentTemp = IO.pure(Celsius(100))
       val error = new Throwable("error")
       val converter: Celsius => IO[Fahrenheit] = _ => IO.raiseError(error)
-      val result = showCurrentTempInF(currentTemp, converter).unsafeRunSync
+      val result = showCurrentTempInF(currentTemp, converter).unsafeRunSync()
 
       result === error.getMessage
     }
@@ -107,7 +107,7 @@ class IOExercisesSpec extends Specification {
       val username = "scalauser"
       val logger = new TestLogger
 
-      mkUsernameThenPrint(username, logger).unsafeRunSync
+      mkUsernameThenPrint(username, logger).unsafeRunSync()
 
       logger.loggedMessages.toList === List(username)
     }
@@ -116,7 +116,7 @@ class IOExercisesSpec extends Specification {
       val username = ""
       val logger = new TestLogger
 
-      val result = mkUsernameThenPrint(username, logger).attempt.unsafeRunSync
+      val result = mkUsernameThenPrint(username, logger).attempt.unsafeRunSync()
 
       result === Left(UsernameError("Username cannot be empty"))
     }
@@ -126,7 +126,7 @@ class IOExercisesSpec extends Specification {
     "write logs in the correct order" in {
       val logger = new TestLogger
 
-      explain(logger).unsafeRunSync
+      explain(logger).unsafeRunSync()
       logger.loggedMessages.toList ==== List("executing step 1", "executing step 2", "executing step 3")
     }
   }

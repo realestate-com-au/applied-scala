@@ -4,6 +4,7 @@ import cats.effect.IO
 
 import com.reagroup.appliedscala.Http4sSpecHelpers._
 import org.http4s._
+import org.http4s.implicits._
 import org.http4s.dsl.Http4sDsl
 import org.http4s.testing.Http4sMatchers
 import org.http4s.testing.IOMatchers
