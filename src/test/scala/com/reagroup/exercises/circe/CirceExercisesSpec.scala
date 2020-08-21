@@ -18,7 +18,7 @@ class CirceExercisesSpec extends Specification {
 
     "return error for invalid Json" in {
       val errOrJson = strToJson("""{"scala"}""")
-      errOrJson.isLeft
+      errOrJson must beLeft
     }
 
   }
