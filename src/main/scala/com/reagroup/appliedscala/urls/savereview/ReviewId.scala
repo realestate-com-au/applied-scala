@@ -2,6 +2,7 @@ package com.reagroup.appliedscala.urls.savereview
 
 import io.circe.Encoder
 import io.circe.Json
+import io.circe.syntax._
 
 case class ReviewId(value: Long)
 
@@ -20,6 +21,9 @@ object ReviewId {
     * of the field in `ReviewId`
     */
 
-   implicit val encoder: Encoder[ReviewId] = Encoder.forProduct1("id")(r => r.value)
+  implicit val encoder: Encoder[ReviewId] =
+    Encoder { id =>
+      Json.obj("id" -> id.value.asJson)
+    }
 
 }

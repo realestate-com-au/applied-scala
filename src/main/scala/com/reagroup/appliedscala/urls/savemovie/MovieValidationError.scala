@@ -26,14 +26,17 @@ object MovieValidationError {
     }
 
   /**
-    * Here is the Encoder instance.
-    *
-    * We want the resulting Json to look like this:
-    *
-    * {
-    *   "error": "MOVIE_NAME_TOO_SHORT"
-    * }
-    */
-  implicit val encoder: Encoder[MovieValidationError] = Encoder.forProduct1("error")(MovieValidationError.show)
+   * Here is the Encoder instance.
+   *
+   * We want the resulting Json to look like this:
+   *
+   * {
+   * "error": "MOVIE_NAME_TOO_SHORT"
+   * }
+   */
+  implicit val encoder: Encoder[MovieValidationError] =
+    Encoder { err =>
+      Json.obj("error" -> MovieValidationError.show(err).asJson)
+    }
 
 }

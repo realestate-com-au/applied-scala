@@ -33,7 +33,7 @@ object EnrichedMovie {
     *
     * which is what we would get if we used `deriveEncoder[EnrichedMovie]`
     *
-    * Hint: You will need to create a custom encoder (you can use .forProduct).
+    * Hint: You will need to create a custom encoder (see how we did it for `MovieId`).
     */
 
 }
