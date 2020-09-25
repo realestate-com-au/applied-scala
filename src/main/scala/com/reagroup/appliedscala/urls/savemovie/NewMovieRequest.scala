@@ -8,14 +8,17 @@ case class NewMovieRequest(name: String, synopsis: String)
 object NewMovieRequest {
 
   /**
-    * Add a Decoder instance here to decode the following Json:
+    * Here is the Decoder instance.
     *
     * {
     *   "name": "Titanic",
     *   "synopsis": "A movie about ships"
     * }
     *
-    * Hint: The keys in the JSON are named exactly the same as the fields in `NewMovieRequest`.
+    * We can just use `deriveDecoder` because the keys in the incoming JSON are named exactly the same
+    * as the fields in resulting data type.
     */
+
+  implicit val decoder: Decoder[NewMovieRequest] = deriveDecoder
 
 }

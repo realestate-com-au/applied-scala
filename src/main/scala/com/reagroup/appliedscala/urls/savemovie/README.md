@@ -36,64 +36,29 @@ _**Complete exercise**_
 
 _**Run unit test: `SaveMovieServiceSpec`**_
 
-### 5. `SaveMovieController` (exercise) (10 min)
+### 5. `SaveMovieController` (exercise) (15 min)
 
 The `Controller` is a little different this time. We have the entire request as an argument to the function. We want to decode the request into a `NewMovieRequest` and then pass that into the `saveNewMovie` function in the class constructor.
 
 After that, we want to `attempt` as usual and handle each possibility.
 
-You will need to complete the following in order to get the `Controller` to compile:
+The `Decoder`s and `Encoder`s that are necessary for this `Controller` to work have been completed ahead of time:
 
 - `Decoder[NewMovieRequest]` 
 - `Encoder[MovieValidationError]`
 - `Encoder[MovieId]`
 
-### 6. `NewMovieRequest` decoder (exercise) (5 min)
-
-We need to describe how to convert from a `Json` into `NewMovieRequest`.
-
-Hint: The incoming JSON body is the same shape as our `NewMovieRequest` case class.
-
-```
-{
-  "name": "Titanic",
-  "synopsis": "A movie about ships"
-}
-```
-
-_**Complete exercise**_
-
-### 7. `MovieValidationError.show` and `MovieValidationError` encoder (exercise) (10 min)
-
-Implement the `show` function first. This is a way to go from our type into a `String`. 
-
-_**Complete exercise**_
-
-_**Run unit test: `MovieValidationErrorSpec`**_
-
-Next, create an `Encoder` instance to convert our type into `Json`.
-
-_**Complete exercise**_
-
-### 8. `MovieId` encoder (exercise) (5 min)
-
-We also need a way to convert a `MovieId` into `Json`.
-
-_**Complete exercise**_
-
-### 9. Finish off `SaveMovieController`! (5 min)
-
 _**Complete exercise**_
 
 _**Run unit test: `SaveMovieControllerSpec`**_
 
-### 10. Wire it all up in `AppRuntime` (5 min)
+### 6. Wire it all up in `AppRuntime` (5 min)
 
 Now let's wire the `Service` and `Controller` up in `AppRuntime`.
 
 Pass the newly instantiated `saveMovieController` into `AppRoutes`.
 
-### 11. Update `AppRoutes` (5 min)
+### 7. Update `AppRoutes` (5 min)
 
 Change AppRoutes to accept a `SaveMovieController` and then call `saveMovie` given the `req`uest!
 

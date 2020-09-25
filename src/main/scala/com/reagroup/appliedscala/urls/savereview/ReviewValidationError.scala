@@ -42,6 +42,9 @@ object ReviewValidationError {
     * Hint: You don't want to use `deriveEncoder` here
     */
 
-   implicit val encoder: Encoder[ReviewValidationError] = Encoder.forProduct1("error")(ReviewValidationError.show)
+   implicit val encoder: Encoder[ReviewValidationError] =
+    Encoder { err =>
+      Json.obj("error" -> ReviewValidationError.show(err).asJson)
+    }
 
 }
