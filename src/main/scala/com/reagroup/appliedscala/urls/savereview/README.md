@@ -12,7 +12,7 @@ This exercise is made up for three parts. Work through them in order:
 
 1. Review the `ReviewValidationError` ADT (already implemented)
 1. Review `ValidatedReview` (already implemented)
-1. Implement `NewReviewValidator` and get the unit tests to pass
+1. Review `NewReviewValidator` (already implemented)
 
 
 ### Part 2

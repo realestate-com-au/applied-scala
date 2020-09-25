@@ -8,13 +8,16 @@ case class NewReviewRequest(author: String, comment: String)
 object NewReviewRequest {
 
   /**
-    * Add a Decoder instance here to decode the following Json:
+    * Here is the Decoder instance.
     *
     * {
     *   "author": "Bob",
     *   "comment": "I liked this a lot"
     * }
+    *
+    * We can just use `deriveDecoder` because the keys in the incoming JSON are named exactly the same
+    * as the fields in resulting data type.
     */
 
-    implicit val decoder: Decoder[NewReviewRequest] = deriveDecoder[NewReviewRequest]
+    implicit val decoder: Decoder[NewReviewRequest] = deriveDecoder
 }

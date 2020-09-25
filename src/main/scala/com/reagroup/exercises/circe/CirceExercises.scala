@@ -54,7 +54,7 @@ object CirceExercises {
     *
     * Note: they may be "shadowed" by a higher priority implicit
     */
-  case object Person {
+  object Person {
 
     /**
       * Create an `Encoder` instance for `Person` by implementing the `apply` method below.

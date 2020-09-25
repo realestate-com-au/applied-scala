@@ -9,6 +9,7 @@ mainClass := Some("com.reagroup.appliedscala.Main")
 val catsVersion = "2.1.1"
 val circeVersion = "0.13.0"
 val http4sVersion = "0.21.6"
+val logbackVersion = "1.2.3"
 val postgresqlVersion = "42.2.4"
 val doobieVersion = "0.8.8"
 val specs2Version = "4.10.1"
@@ -29,6 +30,7 @@ libraryDependencies ++= Seq(
   "org.http4s"              %% "http4s-blaze-client"    % http4sVersion,
   "org.http4s"              %% "http4s-circe"           % http4sVersion,
   "org.http4s"              %% "http4s-dsl"             % http4sVersion,
+  "ch.qos.logback"           % "logback-classic"        % logbackVersion,
   "org.postgresql"           % "postgresql"             % postgresqlVersion,
   "org.tpolecat"            %% "doobie-core"            % doobieVersion,
   "org.tpolecat"            %% "doobie-postgres"        % doobieVersion,
