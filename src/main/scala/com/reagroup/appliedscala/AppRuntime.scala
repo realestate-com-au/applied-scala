@@ -27,7 +27,8 @@ class AppRuntime(config: Config, httpClient: Client[IO], contextShift: ContextSh
 
   /**
    * This is where we instantiate our `Service` and `Controller` for each endpoint.
-   * We will need to write a similar block for each endpoint we write.
+   * You will need to implement a similar block for the `fetchmovies` endpoint when you work on it later.
+   * The rest of the endpoints have been completed for you.
    */
   private val fetchAllMoviesController: FetchAllMoviesController = {
     val fetchAllMoviesService: FetchAllMoviesService = new FetchAllMoviesService(pgsqlRepo.fetchAllMovies)
