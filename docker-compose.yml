@@ -2,9 +2,9 @@ version: "2"
 
 services:
   dev:
-    build: support/dev
+    image: hseeberger/scala-sbt:11.0.7_1.3.13_2.13.3
     working_dir: /work
-    command: support/dev/run
+    command: sbt run
     environment:
       PORT: 9200
       OMDB_API_KEY: 7f9b5b06
@@ -16,9 +16,9 @@ services:
       - "9200:9200"
     volumes:
       - .:/work
-      - ivy-cache:/root/.ivy2
+      - coursier-cache:/root/.cache/coursier
       - docker-scala-sbt-cache:/root/.sbt
-      - docker-scala-sbt-coursier-cache:/root/.cache/coursier
+      - ivy-cache:/root/.ivy2
     depends_on:
       - database
 
@@ -34,9 +34,9 @@ services:
       - ./db:/docker-entrypoint-initdb.d
 
 volumes:
-  ivy-cache:
+  coursier-cache:
     external: true
   docker-scala-sbt-cache:
     external: true
-  docker-scala-sbt-coursier-cache:
+  ivy-cache:
     external: true
