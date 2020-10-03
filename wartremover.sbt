@@ -6,4 +6,6 @@ wartremoverErrors in (Compile, compile) ++= Warts.allBut(
   Wart.Overloading,
   Wart.LeakingSealed,
   Wart.NonUnitStatements,
+  Wart.Option2Iterable,
+  Wart.EitherProjectionPartial,
 )
