@@ -59,8 +59,16 @@ _**Complete exercise**_
 
 _**Run unit test: `FetchEnrichedMovieControllerSpec`**_
 
-### 6. Wire it all up in `AppRuntime` and `AppRoutes`
+### 6. Review the wiring in `AppRuntime` and update `AppRoutes` (exercise)
 
-In `AppRuntime` we can now instantiate our `FetchEnrichedMovieService` and `FetchEnrichedMovieController`, and pass the `Controller` into `AppRoutes`
+In `AppRuntime`, `FetchEnrichedMovieController` has been constructed using `FetchEnrichedMovieService`, and passed into `AppRoutes`.
 
-Finally, we can extend `AppRoutes` to accept `FetchEnrichedMovieController` into the constructor.
+`AppRoutes` has an unused handler called `fetchEnrichedMovieHandler`. Update the `GET /movies/{id}` route to check for the existence of a `?enriched=true` query parameter and call `fetchEnrichedMovieHandler` if the query parameter exists.
+
+You can pattern match on a query parameter as such:
+
+```
+case GET -> Root / "movies" / LongVar(id) :? OptionalEnrichedMatcher(maybeEnriched) => ??? 
+```  
+
+_**Run unit test: `AppRoutesSpec`**_

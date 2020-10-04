@@ -39,15 +39,15 @@ _**Run unit test: `FetchMovieControllerSpec`**_
 
 ### 4. Update `AppRoutes` (exercise)
 
-Change `AppRoutes` to accept a new handler that, given a movie Id of type `Long`, returns a value of the appropriate type.
+Notice that `AppRoutes` has two unused handlers: `fetchMovieHandler` and `fetchEnrichedMovieHandler`. Ignore the latter for now.
 
-Add a new route into `AppRoutes` to fetch a single movie, where the `id` of the movie is extracted out using `LongVar`.
+There is an unimplemented route for fetching a single movie, where the `id` of the movie is extracted out using `LongVar`.
 
 (`LongVar` is an extractor. If a `Long` matches in that spot, we get access to it on the right hand side.)
 
-This route should be handled by the new handler you added.
+Implement this route by calling `fetchMovieHandler`.
 
-(`AppRoutesSpec` might need to be updated to get it to compile.)
+_**Run unit test: `AppRoutesSpec`**_
 
 ### 5. Wire it all up in `AppRuntime` (exercise)
 
