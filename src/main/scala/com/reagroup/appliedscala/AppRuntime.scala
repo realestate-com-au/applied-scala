@@ -44,7 +44,7 @@ class AppRuntime(config: Config, httpClient: Client[IO], contextShift: ContextSh
    * all wired up correctly.
    */
   private val fetchMovieController: FetchMovieController = {
-    ???
+    new FetchMovieController(_ => ???) // Construct a `FetchMovieService`, then fill this out
   }
 
   private val fetchEnrichedMovieController: FetchEnrichedMovieController = {
