@@ -6,7 +6,7 @@ We will now add an endpoint to fetch a movie.
 
 You are provided a `PostgresqlRepository` that contains all the SQL needed to work with Postgres. We have done this for you so that you do not have to write any of the SQL on your own.
  
-We are using a library called `Doobie`. If we look at this file, we have one function for each of our endpoints already implemented. Keep in mind that the return type of each function is an `IO`.
+We are using a library called [doobie](https://tpolecat.github.io/doobie/). If we look at this file, we have one function for each of our endpoints already implemented. Keep in mind that the return type of each function is an `IO`.
 
 The function that is useful for us for this endpoint is `fetchMovie`, which has type signature of `MovieId => IO[Option[Movie]]`.
 
