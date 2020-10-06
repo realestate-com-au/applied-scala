@@ -26,7 +26,7 @@ object ValidationExercises {
 
   case object PasswordTooWeak extends ValidationError
 
-  case class NameIsEmpty(label: String) extends ValidationError
+  final case class NameIsEmpty(label: String) extends ValidationError
 
   /**
     * If the `name` is empty, return a `NameIsEmpty(label)` in an `Invalid(NonEmptyList(...)`.

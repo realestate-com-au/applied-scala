@@ -10,6 +10,6 @@ object ConfigError {
   }
 }
 
-case class MissingEnvironmentVariable(name: String) extends ConfigError {
+final case class MissingEnvironmentVariable(name: String) extends ConfigError {
   def message: String = s"Missing environment variable: $name"
 }
