@@ -23,8 +23,7 @@ This exercise is made up for three parts. Work through them in order:
 
 ### Part 3
 1. Review `SaveReviewController` (already implemented)
-1. Wire everything up in `AppRuntime`and `AppRoutes`
-1. Get `AppRoutesSpec` to pass
+1. Review the wiring in `AppRuntime`and `AppRoutes`
 1. Run curls to verify the application has been wired correctly
 
 

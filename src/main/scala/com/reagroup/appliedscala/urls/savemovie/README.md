@@ -52,15 +52,11 @@ _**Complete exercise**_
 
 _**Run unit test: `SaveMovieControllerSpec`**_
 
-### 6. Wire it all up in `AppRuntime` (5 min)
+### Review `AppRuntime` and `AppRoutes` (5 min)
 
-Now let's wire the `Service` and `Controller` up in `AppRuntime`.
+The `Service` and `Controller` have been wired up in `AppRuntime` and passed into `AppRoutes`.
 
-Pass the newly instantiated `saveMovieController` into `AppRoutes`.
-
-### 7. Update `AppRoutes` (5 min)
-
-Change AppRoutes to accept a `SaveMovieController` and then call `saveMovie` given the `req`uest!
+There is a `POST` route that calls the `saveMovieHandler`.
 
 Note that `req@POST...` means that `req` is an alias for the value on the right hand side.
 

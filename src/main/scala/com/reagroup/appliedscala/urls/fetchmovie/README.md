@@ -6,7 +6,7 @@ We will now add an endpoint to fetch a movie.
 
 You are provided a `PostgresqlRepository` that contains all the SQL needed to work with Postgres. We have done this for you so that you do not have to write any of the SQL on your own.
  
-We are using a library called `Doobie`. If we look at this file, we have one function for each of our endpoints already implemented. Keep in mind that the return type of each function is an `IO`.
+We are using a library called [doobie](https://tpolecat.github.io/doobie/). If we look at this file, we have one function for each of our endpoints already implemented. Keep in mind that the return type of each function is an `IO`.
 
 The function that is useful for us for this endpoint is `fetchMovie`, which has type signature of `MovieId => IO[Option[Movie]]`.
 
@@ -14,7 +14,7 @@ The function that is useful for us for this endpoint is `fetchMovie`, which has 
 
 The `Service` typically has business logic. For example, it may call multiple repositories and then validate their responses to construct another response.
 
-Pay attention to the types we are using in the `Service`. We have a `MovieId` (not a `Long`!) and we are returning a `Movie`. We want nice readable types in our `Service` layer.
+Pay attention to the types we are using in the `Service`. We have a `MovieId` (not a `Long`!) and we are returning a `Movie`. Not only do these types improve readability, they provide additional safety. We can't accidentally supply a `CustomerId` where a `MovieId` is expected.
 
 There's nothing to do with HTTP or Json responses here.
 
@@ -39,15 +39,15 @@ _**Run unit test: `FetchMovieControllerSpec`**_
 
 ### 4. Update `AppRoutes` (exercise)
 
-Change `AppRoutes` to accept a new handler that, given a movie Id of type `Long`, returns a value of the appropriate type.
+Notice that `AppRoutes` has two unused handlers: `fetchMovieHandler` and `fetchEnrichedMovieHandler`. Ignore the latter for now.
 
-Add a new route into `AppRoutes` to fetch a single movie, where the `id` of the movie is extracted out using `LongVar`.
+There is an unimplemented route for fetching a single movie, where the `id` of the movie is extracted out using `LongVar`.
 
 (`LongVar` is an extractor. If a `Long` matches in that spot, we get access to it on the right hand side.)
 
-This route should be handled by the new handler you added.
+Implement this route by calling `fetchMovieHandler`.
 
-(`AppRoutesSpec` might need to be updated to get it to compile.)
+_**Run unit test: `AppRoutesSpec`**_
 
 ### 5. Wire it all up in `AppRuntime` (exercise)
 
