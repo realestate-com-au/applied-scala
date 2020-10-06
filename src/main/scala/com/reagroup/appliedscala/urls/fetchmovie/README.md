@@ -14,7 +14,7 @@ The function that is useful for us for this endpoint is `fetchMovie`, which has 
 
 The `Service` typically has business logic. For example, it may call multiple repositories and then validate their responses to construct another response.
 
-Pay attention to the types we are using in the `Service`. We have a `MovieId` (not a `Long`!) and we are returning a `Movie`. We want nice readable types in our `Service` layer.
+Pay attention to the types we are using in the `Service`. We have a `MovieId` (not a `Long`!) and we are returning a `Movie`. Not only do these types improve readability, they provide additional safety. We can't accidentally supply a `CustomerId` where a `MovieId` is expected.
 
 There's nothing to do with HTTP or Json responses here.
 
