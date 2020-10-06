@@ -1,1 +1,10 @@
-//wartremoverErrors in (Compile, compile) ++= Warts.allBut(Wart.Nothing, Wart.Any, Wart.Recursion)
+wartremoverErrors in (Compile, compile) ++= Warts.allBut(
+  Wart.Nothing,
+  Wart.Any,
+  Wart.FinalCaseClass,
+  Wart.Overloading,
+  Wart.LeakingSealed,
+  Wart.NonUnitStatements,
+  Wart.Option2Iterable,
+  Wart.EitherProjectionPartial,
+)
