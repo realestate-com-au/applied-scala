@@ -47,7 +47,7 @@ There is an unimplemented route for fetching a single movie, where the `id` of t
 
 Implement this route by calling `fetchMovieHandler`.
 
-_**Run unit test: `AppRoutesSpec`**_
+_**Run unit test: `AppRoutesSpec`**_ (ignore the failure in the `enriched` route test)
 
 ### 5. Wire it all up in `AppRuntime` (exercise)
 
