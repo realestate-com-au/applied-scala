@@ -64,19 +64,35 @@ Using portable SBT
 
 ### Day 1
 
-- IO Exercises
-- Http4s overview + Endpoint 1: Hello World
-- Circe Exercises
-- [Code walkthrough: GET all movies (no exercises)](./src/main/scala/com/reagroup/appliedscala/urls/fetchallmovies/README.md) 
-- [Endpoint 2: GET movie](./src/main/scala/com/reagroup/appliedscala/urls/fetchmovie/README.md)
-- [Endpoint 3: GET movie?enriched=true](./src/main/scala/com/reagroup/appliedscala/urls/fetchenrichedmovie/README.md)
+| Time  | Topic/Exercise                                                                                                          |
+|-------|-------------------------------------------------------------------------------------------------------------------------|
+| 9.15  | :microphone: Day 1 Keynote                                                                                              |
+| 10.00 | Morning break                                                                                                           |
+| 10.15 | :soccer: [IO Exercises](src/main/scala/com/reagroup/exercises/io/IOExercises.scala)                                     |
+| 11.30 | :computer: Intro to Http4s (Presentation)                                                                               |
+| 12.00 | Lunch                                                                                                                   |
+| 13.00 | :soccer: [Circe Exercises](src/main/scala/com/reagroup/exercises/circe/CirceExercises.scala)                            |
+| 14.00 | Code walkthrough: [GET all movies (no exercises)](src/main/scala/com/reagroup/appliedscala/urls/fetchallmovies)         |
+| 14.30 | :computer: [Endpoint Ex.1: GET movie](./src/main/scala/com/reagroup/appliedscala/urls/fetchmovie)                       |
+| 15.30 | Afternoon break                                                                                                         |
+| 15.45 | :computer: [Endpoint Ex.2: GET movie?enriched=true](./src/main/scala/com/reagroup/appliedscala/urls/fetchenrichedmovie) |
+| 17.00 | End                                                                                                                     |
 
 ### Day 2
 
-- Validated Exercises
-- [Endpoint 4: POST movie](./src/main/scala/com/reagroup/appliedscala/urls/savemovie/README.md)
-- [Endpoint 5: POST movie/id/review](./src/main/scala/com/reagroup/appliedscala/urls/savereview/README.md)
-- Wrap up
+| Time  | Topic/Exercise                                                                                                 |
+|-------|----------------------------------------------------------------------------------------------------------------|
+| 9.15  | :microphone: Day 2 Keynote                                                                                     |
+| 10.00 | :computer: Endpoint Ex.2 (Continued)                                                                           |
+| 10.25 | Morning break                                                                                                  |
+| 10.40 | Validated and Traverse Theory (Presentation)                                                                   |
+| 11.30 | :soccer: [Validated Exercises](src/main/scala/com/reagroup/exercises/validated/ValidationExercises.scala)      |
+| 12.30 | Lunch                                                                                                          |
+| 13.30 | :computer: [Endpoint Ex.3: POST movie](./src/main/scala/com/reagroup/appliedscala/urls/savemovie)              |
+| 15.00 | Afternoon break                                                                                                |
+| 15.15 | :computer: [Endpoint Ex.4: POST movie/id/review](./src/main/scala/com/reagroup/appliedscala/urls/savereview) |
+| 16:45 | :microphone: Wrap-up + Endpoint Ex.2 revisited (w/ Traverse)                                                   |
+| 17:00 | End                                                                                                            |
 
 ## Further reading
 
