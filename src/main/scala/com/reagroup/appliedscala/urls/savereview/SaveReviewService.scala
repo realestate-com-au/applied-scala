@@ -17,7 +17,7 @@ class SaveReviewService(saveReview: (MovieId, ValidatedReview) => IO[ReviewId],
     */
   def save(movieId: MovieId, review: NewReviewRequest): IO[ValidatedNel[ReviewValidationError, ReviewId]] = ???
 
-  private def validateMovie(movieOp: Option[Movie]): ValidatedNel[ReviewValidationError, Movie] = ???
+  private def validateMovie(maybeMovie: Option[Movie]): ValidatedNel[ReviewValidationError, Movie] = ???
 
   private def validateReview(review: NewReviewRequest): ValidatedNel[ReviewValidationError, ValidatedReview] = ???
 
