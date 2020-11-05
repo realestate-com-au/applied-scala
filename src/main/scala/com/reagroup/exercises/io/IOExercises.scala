@@ -123,7 +123,7 @@ object IOExercises {
   def showCurrentTempInF(currentTemp: IO[Celsius], converter: Celsius => IO[Fahrenheit]): IO[String] =
     currentTemp.flatMap(converter).attempt.map {
       case Left(e) => e.getMessage
-      case Right(t) => s"The temperature is ${t.value}"
+      case Right(t) => s"The temperature is ${t.value.toString}"
     }
 
   /**
