@@ -22,7 +22,8 @@ class AppRoutes(fetchAllMoviesHandler: IO[Response[IO]],
 
   val openRoutes: HttpRoutes[IO] = HttpRoutes.of {
     case GET -> Root / "movies" => fetchAllMoviesHandler
-    case GET -> Root / "movies" / LongVar(id) => fetchMovieHandler(id)
+    case GET -> Root / "movies" / LongVar(id) :? OptionalEnrichedMatcher(optEnriched) =>
+      if (optEnriched.contains(true)) fetchEnrichedMovieHandler(id) else fetchMovieHandler(id)
     case req @ POST -> Root / "movies" => saveMovieHandler(req)
     case req @ POST -> Root / "movies" / LongVar(id) / "reviews" => saveReviewHandler(id, req)
   }

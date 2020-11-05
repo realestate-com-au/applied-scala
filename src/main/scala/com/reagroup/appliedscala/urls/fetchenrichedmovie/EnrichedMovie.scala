@@ -8,6 +8,16 @@ case class EnrichedMovie(movie: Movie, metascore: Metascore)
 
 object EnrichedMovie {
 
+  implicit val enrichedMovieEncoder: Encoder[EnrichedMovie] = new Encoder[EnrichedMovie] {
+    override def apply(enrichedMovie: EnrichedMovie): Json = {
+      Json.obj(
+        ("name", enrichedMovie.movie.name.asJson),
+        ("synopsis", enrichedMovie.movie.synopsis.asJson),
+        ("reviews", enrichedMovie.movie.reviews.asJson),
+        ("metascore", enrichedMovie.metascore.value.asJson)
+      )
+    }
+  }
   /**
     * Add an Encoder instance here
     *

@@ -8,6 +8,23 @@ case class Metascore(value: Int)
 
 object Metascore {
 
+  implicit val metascoreDecoder: Decoder[Metascore] = Decoder.instance(cursor => {
+    for {
+      metascore <- cursor.downField("Metascore").as[Int]
+    } yield Metascore(metascore)
+  })
+
+// Another decoder implementation
+//    override def apply(c: HCursor): Result[Metascore] = {
+//      for {
+//        metascore <- c.downField("Metascore").as[Int]
+//
+//      } yield Metascore(metascore)
+//    }
+
+
+
+
   /**
     * Add a Decoder instance here to decode a JSON containing "Metascore" into a `Metascore`, e.g.
     *
