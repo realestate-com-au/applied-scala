@@ -20,6 +20,15 @@ class FetchMovieController(fetchMovie: MovieId => IO[Option[Movie]]) extends Htt
     * Delegate the error case to the `ErrorHandler`.
     */
   def fetch(movieId: Long): IO[Response[IO]] =
-    ???
+    for {
+      errorOrMovie <- fetchMovie(MovieId(movieId)).attempt
+      response <- errorOrMovie match {
+        case Right(optMovie) => optMovie match {
+          case Some(movie) => Ok(movie)
+          case None => NotFound()
+        }
+        case Left(error) => ErrorHandler(error)
+      }
+    } yield response
 
 }
