@@ -24,7 +24,7 @@ object CirceExercises {
   /**
     * Json Parsing
     *
-    * Hint: `parser` is already in scope (imported through `io.circe._`)
+    * Hint: `parser.parse` is already in scope (imported through `io.circe._`)
     *
     * Why is the return type an `Either`?
     */
