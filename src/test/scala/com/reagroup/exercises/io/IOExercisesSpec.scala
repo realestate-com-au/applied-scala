@@ -129,6 +129,13 @@ class IOExercisesSpec extends Specification {
       explain(logger).unsafeRunSync()
       logger.loggedMessages.toList ==== List("executing step 1", "executing step 2", "executing step 3")
     }
+    
+    "should not write logs if the IO is not run" in {
+      val logger = new TestLogger
+
+      explain(logger)
+      logger.loggedMessages.toList ==== List.empty
+    }
   }
 
   "execute" should {
