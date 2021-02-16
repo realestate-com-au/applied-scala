@@ -11,7 +11,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object Main extends IOApp {
 
-  def run(args: List[String]): IO[ExitCode] = {
+  override def run(args: List[String]): IO[ExitCode] = {
     val server = startServer()
 
     println("Starting server")
@@ -26,7 +26,7 @@ object Main extends IOApp {
     }
   }
 
-  def startServer(): IO[ExitCode] = {
+  private def startServer(): IO[ExitCode] = {
     for {
       config <- Config.fromEnvironment()
       process <- runServerWith(config)
