@@ -11,7 +11,11 @@ import org.http4s.testing.IOMatchers
 import org.specs2.mutable.Specification
 import org.specs2.specification.core.Fragment
 
-class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers[IO] with IOMatchers {
+class AppRoutesSpec
+    extends Specification
+    with Http4sDsl[IO]
+    with Http4sMatchers[IO]
+    with IOMatchers {
 
   /*
    * We can test our routes independently of our controllers.
@@ -74,9 +78,15 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
     val endpoints: List[(Request[IO], String)] = List(
       request(path = "/movies", method = Method.GET) -> "great titles",
       request(path = "/movies/123", method = Method.GET) -> "got movie 123",
-      request(uri = uri"/movies/123?enriched=true", method = Method.GET) -> "got enriched movie 123",
+      request(
+        uri = uri"/movies/123?enriched=true",
+        method = Method.GET
+      ) -> "got enriched movie 123",
       request(path = "/movies", method = Method.POST) -> "movie 456 created",
-      request(path = "/movies/456/reviews", method = Method.POST) -> "review 7 for movie 456 created"
+      request(
+        path = "/movies/456/reviews",
+        method = Method.POST
+      ) -> "review 7 for movie 456 created"
     )
 
     Fragment.foreach(endpoints) { endpoint =>
@@ -85,15 +95,22 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
       s"for ${req.method} ${req.uri}" in {
 
         "return OK" in {
-          testAppRoutes.openRoutes(req).getOrElse(Response[IO](status = Status.NotFound)) must returnValue(haveStatus(Status.Ok))
+          testAppRoutes
+            .openRoutes(req)
+            .getOrElse(Response[IO](status = Status.NotFound)) must returnValue(
+            haveStatus(Status.Ok)
+          )
         }
 
         "return expected response" in {
-          body(testAppRoutes.openRoutes(req).getOrElse(Response[IO](Status.NotFound))) must beEqualTo(expectedResponse)
+          body(
+            testAppRoutes
+              .openRoutes(req)
+              .getOrElse(Response[IO](Status.NotFound))
+          ) must beEqualTo(expectedResponse)
         }
       }
     }
   }
 
 }
-

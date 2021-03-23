@@ -7,8 +7,7 @@ case class NewMovieRequest(name: String, synopsis: String)
 
 object NewMovieRequest {
 
-  /**
-    * Here is the Decoder instance.
+  /** Here is the Decoder instance.
     *
     * {
     *   "name": "Titanic",

@@ -8,10 +8,11 @@ import org.http4s._
 import org.http4s.circe.CirceEntityCodec._
 import org.http4s.dsl.Http4sDsl
 
-class FetchEnrichedMovieController(fetchEnrichedMovie: MovieId => IO[Option[EnrichedMovie]]) extends Http4sDsl[IO] {
+class FetchEnrichedMovieController(
+    fetchEnrichedMovie: MovieId => IO[Option[EnrichedMovie]]
+) extends Http4sDsl[IO] {
 
-  /**
-    * 1. Convert `movieId` to a value of `MovieId` type
+  /** 1. Convert `movieId` to a value of `MovieId` type
     * 2. Call `fetchEnrichedMovie` and don't forget to `attempt` so you can handle errors!
     * 3. Pattern match on the results and convert each possible case into an HTTP response
     *
@@ -21,9 +22,9 @@ class FetchEnrichedMovieController(fetchEnrichedMovie: MovieId => IO[Option[Enri
     val id: MovieId = ???
 
     fetchEnrichedMovie(id).attempt.flatMap {
-      case Left(error) => ???
+      case Left(error)                => ???
       case Right(Some(enrichedMovie)) => ???
-      case Right(None) => ???
+      case Right(None)                => ???
     }
 
   }

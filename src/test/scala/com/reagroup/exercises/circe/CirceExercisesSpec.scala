@@ -39,7 +39,10 @@ class CirceExercisesSpec extends Specification {
     "convert Person to Json" in {
       val person = Person("scala", 20)
       val actual = encodePersonDifferently(person)
-      val expected = Json.obj("different_name" -> "scala".asJson, "different_age" -> 20.asJson)
+      val expected = Json.obj(
+        "different_name" -> "scala".asJson,
+        "different_age" -> 20.asJson
+      )
 
       actual must_=== expected
     }
@@ -96,7 +99,8 @@ class CirceExercisesSpec extends Specification {
   "strToPerson" should {
 
     "convert valid Json String to Person" in {
-      val jsonStr = Json.obj("name" -> "scala".asJson, "age" -> 20.asJson).noSpaces
+      val jsonStr =
+        Json.obj("name" -> "scala".asJson, "age" -> 20.asJson).noSpaces
       val errOrPerson = strToPerson(jsonStr)
 
       errOrPerson must_=== Right(Person("scala", 20))
@@ -108,7 +112,7 @@ class CirceExercisesSpec extends Specification {
 
       errOrPerson match {
         case Left(ParsingFailure(_, _)) => ok
-        case other => ko(s"Expected ParsingFailure, but received: $other")
+        case other                      => ko(s"Expected ParsingFailure, but received: $other")
       }
     }
 
@@ -118,7 +122,7 @@ class CirceExercisesSpec extends Specification {
 
       errOrPerson match {
         case Left(DecodingFailure(_, _)) => ok
-        case other => ko(s"Expected DecodingFailure, but received: $other")
+        case other                       => ko(s"Expected DecodingFailure, but received: $other")
       }
     }
 

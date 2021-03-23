@@ -7,8 +7,7 @@ case class Movie(name: String, synopsis: String, reviews: Vector[Review])
 
 object Movie {
 
-  /**
-    * Add an Encoder instance here
+  /** Add an Encoder instance here
     *
     * Hint: Use `deriveEncoder`
     */

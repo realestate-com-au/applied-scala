@@ -9,10 +9,10 @@ import org.http4s._
 import org.http4s.circe.CirceEntityCodec._
 import org.http4s.dsl.Http4sDsl
 
-class FetchAllMoviesController(fetchMovies: IO[Vector[Movie]]) extends Http4sDsl[IO] {
+class FetchAllMoviesController(fetchMovies: IO[Vector[Movie]])
+    extends Http4sDsl[IO] {
 
-  /**
-    * 1. Execute the `fetchMovies` function to retrieve all our movies.
+  /** 1. Execute the `fetchMovies` function to retrieve all our movies.
     * 2. Call `attempt` "at the end of the world" (right before we serve responses to the client)
     * because every `IO` can fail and we want to handle errors gracefully.
     * 3. Pattern match on the results and convert each possible case into an HTTP response.
@@ -22,12 +22,11 @@ class FetchAllMoviesController(fetchMovies: IO[Vector[Movie]]) extends Http4sDsl
     errorOrMovies <- fetchMovies.attempt
     resp <- errorOrMovies match {
       case Right(movies) => Ok(movies.map(movieToJson))
-      case Left(e) => ErrorHandler(e)
+      case Left(e)       => ErrorHandler(e)
     }
   } yield resp
 
-  /**
-    * The reason we aren't using an `Encoder` instance for this conversion here is because
+  /** The reason we aren't using an `Encoder` instance for this conversion here is because
     * we want you to write your own `Encoder` instance for the `GET movie/id` endpoint.
     * Don't want to giveaway the answer :)
     */

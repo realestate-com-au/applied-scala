@@ -7,11 +7,12 @@ import com.reagroup.appliedscala.models._
 
 class SaveMovieService(saveMovie: ValidatedMovie => IO[MovieId]) {
 
-  /**
-    * Before saving a `NewMovieRequest`, we want to validate the request in order to get a `ValidatedMovie`.
+  /** Before saving a `NewMovieRequest`, we want to validate the request in order to get a `ValidatedMovie`.
     * Complete `NewMovieValidator`, then use it here before calling `saveMovie`.
     */
-  def save(newMovieReq: NewMovieRequest): IO[ValidatedNel[MovieValidationError, MovieId]] =
+  def save(
+      newMovieReq: NewMovieRequest
+  ): IO[ValidatedNel[MovieValidationError, MovieId]] =
     ???
 
 }

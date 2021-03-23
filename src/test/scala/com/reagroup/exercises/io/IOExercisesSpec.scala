@@ -35,7 +35,8 @@ class IOExercisesSpec extends Specification {
     "return an IO containing an Exception" in {
       alwaysFailingTask().attempt.unsafeRunSync() match {
         case Left(_: Exception) => ok
-        case otherwise => ko(s"Expected a Left(Exception()) but received a $otherwise")
+        case otherwise =>
+          ko(s"Expected a Left(Exception()) but received a $otherwise")
       }
     }
   }
@@ -59,7 +60,9 @@ class IOExercisesSpec extends Specification {
       val msg = ""
       val result = logMessageOrFailIfEmpty(msg, logger).attempt.unsafeRunSync()
 
-      result === Left(AppException("Log must not be empty")) && logger.loggedMessages.toList === List()
+      result === Left(
+        AppException("Log must not be empty")
+      ) && logger.loggedMessages.toList === List()
     }
   }
 
@@ -75,9 +78,9 @@ class IOExercisesSpec extends Specification {
   "getCurrentTempInFAgain" should {
     "convert the current temperature to Fahrenheit using an external converter" in {
       val currentTemp = IO.pure(Celsius(100))
-      val converter = (c: Celsius) => IO(Fahrenheit(c.value * 9 / 5 + 32)
-      )
-      val result = getCurrentTempInFAgain(currentTemp, converter).unsafeRunSync()
+      val converter = (c: Celsius) => IO(Fahrenheit(c.value * 9 / 5 + 32))
+      val result =
+        getCurrentTempInFAgain(currentTemp, converter).unsafeRunSync()
 
       result === Fahrenheit(212)
     }
@@ -127,9 +130,13 @@ class IOExercisesSpec extends Specification {
       val logger = new TestLogger
 
       explain(logger).unsafeRunSync()
-      logger.loggedMessages.toList ==== List("executing step 1", "executing step 2", "executing step 3")
+      logger.loggedMessages.toList ==== List(
+        "executing step 1",
+        "executing step 2",
+        "executing step 3"
+      )
     }
-    
+
     "should not write logs if the IO is not run" in {
       val logger = new TestLogger
 
@@ -150,4 +157,3 @@ class IOExercisesSpec extends Specification {
   }
 
 }
-

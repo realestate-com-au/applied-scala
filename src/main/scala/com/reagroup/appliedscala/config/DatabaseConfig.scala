@@ -4,10 +4,10 @@ import cats.data.ValidatedNel
 import cats.implicits._
 
 case class DatabaseConfig(
-  host: String,
-  username: String,
-  password: SensitiveValue[String],
-  databaseName: String
+    host: String,
+    username: String,
+    password: SensitiveValue[String],
+    databaseName: String
 )
 
 object DatabaseConfig {

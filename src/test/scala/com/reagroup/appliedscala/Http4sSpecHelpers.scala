@@ -6,7 +6,11 @@ import org.http4s.{Method, Query, Request, Response, Uri}
 
 object Http4sSpecHelpers {
   def header(response: IO[Response[IO]], headerName: String): Option[String] = {
-    response.unsafeRunSync().headers.get(CaseInsensitiveString(headerName)).map(_.value)
+    response
+      .unsafeRunSync()
+      .headers
+      .get(CaseInsensitiveString(headerName))
+      .map(_.value)
   }
 
   def body(response: IO[Response[IO]]): String = {
@@ -15,10 +19,10 @@ object Http4sSpecHelpers {
   }
 
   def request(path: String, method: Method): Request[IO] = {
-      Request[IO](method = method, uri = Uri(path = path))
+    Request[IO](method = method, uri = Uri(path = path))
   }
 
   def request(uri: Uri, method: Method): Request[IO] = {
-      Request[IO](method = method, uri = uri)
+    Request[IO](method = method, uri = uri)
   }
 }

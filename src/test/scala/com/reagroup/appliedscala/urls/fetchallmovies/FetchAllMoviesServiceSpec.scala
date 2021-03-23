@@ -10,7 +10,8 @@ class FetchAllMoviesServiceSpec extends Specification {
 
     "return all movies" in {
 
-      val movie1 = Movie("Batman Returns", "Bats are cool!", Vector.empty[Review])
+      val movie1 =
+        Movie("Batman Returns", "Bats are cool!", Vector.empty[Review])
       val movie2 = Movie("Titanic", "Can't sink this!", Vector.empty[Review])
       val allMovies = Vector(movie1, movie2)
 

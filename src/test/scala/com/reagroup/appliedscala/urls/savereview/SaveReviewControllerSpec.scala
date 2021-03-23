@@ -10,7 +10,10 @@ import org.http4s.testing.Http4sMatchers
 import org.http4s.testing.IOMatchers
 import org.specs2.mutable.Specification
 
-class SaveReviewControllerSpec extends Specification with Http4sMatchers[IO] with IOMatchers {
+class SaveReviewControllerSpec
+    extends Specification
+    with Http4sMatchers[IO]
+    with IOMatchers {
 
   "when saving a valid review" should {
 
@@ -24,7 +27,10 @@ class SaveReviewControllerSpec extends Specification with Http4sMatchers[IO] wit
 
     val request = Request[IO](method = Method.POST).withEntity(json.noSpaces)
 
-    val controller = new SaveReviewController((_: MovieId, _: NewReviewRequest) => IO.pure(ReviewId(1).valid))
+    val controller =
+      new SaveReviewController((_: MovieId, _: NewReviewRequest) =>
+        IO.pure(ReviewId(1).valid)
+      )
 
     val actual = controller.save(100, request).unsafeRunSync()
 
@@ -56,9 +62,13 @@ class SaveReviewControllerSpec extends Specification with Http4sMatchers[IO] wit
         }
       """
 
-    val request = Request[IO](method = Method.POST).withEntity(invalidJson.noSpaces)
+    val request =
+      Request[IO](method = Method.POST).withEntity(invalidJson.noSpaces)
 
-    val saveNewReview = (_: MovieId, _: NewReviewRequest) => IO.pure(NonEmptyList.of(ReviewAuthorTooShort, ReviewCommentTooShort).invalid)
+    val saveNewReview = (_: MovieId, _: NewReviewRequest) =>
+      IO.pure(
+        NonEmptyList.of(ReviewAuthorTooShort, ReviewCommentTooShort).invalid
+      )
 
     val controller = new SaveReviewController(saveNewReview)
 

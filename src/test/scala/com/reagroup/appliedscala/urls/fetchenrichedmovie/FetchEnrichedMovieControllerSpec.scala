@@ -8,11 +8,17 @@ import org.http4s.testing.Http4sMatchers
 import org.http4s.testing.IOMatchers
 import org.specs2.mutable.Specification
 
-class FetchEnrichedMovieControllerSpec extends Specification with Http4sMatchers[IO] with IOMatchers {
+class FetchEnrichedMovieControllerSpec
+    extends Specification
+    with Http4sMatchers[IO]
+    with IOMatchers {
 
   "when fetching a movie that exists" should {
 
-    val expectedMovie = EnrichedMovie(Movie("badman", "the first in the series", Vector.empty), Metascore(100))
+    val expectedMovie = EnrichedMovie(
+      Movie("badman", "the first in the series", Vector.empty),
+      Metascore(100)
+    )
 
     val fetchMovie = (_: MovieId) => IO.pure(Some(expectedMovie))
 
@@ -61,7 +67,8 @@ class FetchEnrichedMovieControllerSpec extends Specification with Http4sMatchers
 
   "when encountered an error" should {
 
-    val fetchEnrichedMovie = (_: MovieId) => IO.raiseError(new RuntimeException("unknown error"))
+    val fetchEnrichedMovie =
+      (_: MovieId) => IO.raiseError(new RuntimeException("unknown error"))
 
     val controller = new FetchEnrichedMovieController(fetchEnrichedMovie)
 
