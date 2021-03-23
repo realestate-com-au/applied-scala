@@ -8,8 +8,7 @@ case class EnrichedMovie(movie: Movie, metascore: Metascore)
 
 object EnrichedMovie {
 
-  /**
-    * Add an Encoder instance here
+  /** Add an Encoder instance here
     *
     * We want the Json to look like:
     *

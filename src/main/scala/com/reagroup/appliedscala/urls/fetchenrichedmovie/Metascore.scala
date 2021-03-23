@@ -8,8 +8,7 @@ case class Metascore(value: Int)
 
 object Metascore {
 
-  /**
-    * Add a Decoder instance here to decode a JSON containing "Metascore" into a `Metascore`, e.g.
+  /** Add a Decoder instance here to decode a JSON containing "Metascore" into a `Metascore`, e.g.
     *
     * Convert:
     *

@@ -48,6 +48,12 @@ Using portable SBT
 ./sbt
 ```
 
+## Run scalafmt
+
+```
+./auto/sbt scalafmtAll
+```
+
 ## Run test
 
 ```

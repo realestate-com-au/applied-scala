@@ -7,8 +7,7 @@ case class Review(author: String, comment: String)
 
 object Review {
 
-  /**
-    * Add an Encoder instance here
+  /** Add an Encoder instance here
     *
     * Hint: Use `deriveEncoder`
     */

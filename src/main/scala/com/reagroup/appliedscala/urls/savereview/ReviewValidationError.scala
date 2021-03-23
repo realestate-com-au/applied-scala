@@ -14,8 +14,7 @@ case object MovieDoesNotExist extends ReviewValidationError
 
 object ReviewValidationError {
 
-  /**
-    * Write a function that turns an `ReviewValidationError` to a `String`.
+  /** Write a function that turns an `ReviewValidationError` to a `String`.
     * This will be used in our `Encoder`.
     *
     * `ReviewAuthorTooShort` -> "REVIEW_AUTHOR_TOO_SHORT"
@@ -30,8 +29,7 @@ object ReviewValidationError {
     case MovieDoesNotExist     => "MOVIE_DOES_NOT_EXIST"
   }
 
-  /**
-    * Add an Encoder instance here
+  /** Add an Encoder instance here
     *
     * We want the resulting Json to look like this:
     *
@@ -42,7 +40,7 @@ object ReviewValidationError {
     * Hint: You don't want to use `deriveEncoder` here
     */
 
-   implicit val encoder: Encoder[ReviewValidationError] =
+  implicit val encoder: Encoder[ReviewValidationError] =
     Encoder { err =>
       Json.obj("error" -> ReviewValidationError.show(err).asJson)
     }

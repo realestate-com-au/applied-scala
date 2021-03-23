@@ -13,12 +13,20 @@ object ErrorHandler extends Http4sDsl[IO] {
   def apply(e: Throwable): IO[Response[IO]] =
     e match {
       case err: AppError => encodeAppError(err)
-      case err => InternalServerError(Json.obj("error" -> s"Unexpected error has occurred: ${err.getMessage}".asJson))
+      case err =>
+        InternalServerError(
+          Json.obj(
+            "error" -> s"Unexpected error has occurred: ${err.getMessage}".asJson
+          )
+        )
     }
 
   private def encodeAppError(appError: AppError): IO[Response[IO]] =
     appError match {
-      case EnrichmentFailure(movieName) => InternalServerError(Json.obj("error" -> s"Failed to enrich movie: $movieName".asJson))
+      case EnrichmentFailure(movieName) =>
+        InternalServerError(
+          Json.obj("error" -> s"Failed to enrich movie: $movieName".asJson)
+        )
     }
 
 }

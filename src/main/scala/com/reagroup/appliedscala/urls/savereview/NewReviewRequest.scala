@@ -7,8 +7,7 @@ case class NewReviewRequest(author: String, comment: String)
 
 object NewReviewRequest {
 
-  /**
-    * Here is the Decoder instance.
+  /** Here is the Decoder instance.
     *
     * {
     *   "author": "Bob",
@@ -19,5 +18,5 @@ object NewReviewRequest {
     * as the fields in resulting data type.
     */
 
-    implicit val decoder: Decoder[NewReviewRequest] = deriveDecoder
+  implicit val decoder: Decoder[NewReviewRequest] = deriveDecoder
 }

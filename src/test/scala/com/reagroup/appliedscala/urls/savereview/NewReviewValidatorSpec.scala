@@ -12,7 +12,9 @@ class NewReviewValidatorSpec extends Specification {
 
       val result = NewReviewValidator.validate(review)
 
-      result must_=== NonEmptyList.of(ReviewAuthorTooShort, ReviewCommentTooShort).invalid
+      result must_=== NonEmptyList
+        .of(ReviewAuthorTooShort, ReviewCommentTooShort)
+        .invalid
     }
 
     "return NewMovie" in {

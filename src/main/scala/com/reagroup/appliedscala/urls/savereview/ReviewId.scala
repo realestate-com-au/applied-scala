@@ -8,8 +8,7 @@ case class ReviewId(value: Long)
 
 object ReviewId {
 
-  /**
-    * Here is the Encoder instance.
+  /** Here is the Encoder instance.
     *
     * We want the resulting Json to look like this:
     *

@@ -4,8 +4,7 @@ import io.circe.Decoder.Result
 import io.circe._
 import io.circe.syntax._
 
-/**
-  * Circe (pronounced SUR-see, or KEER-kee in classical Greek, or CHEER-chay in Ecclesiastical Latin) is a JSON library for Scala.
+/** Circe (pronounced SUR-see, or KEER-kee in classical Greek, or CHEER-chay in Ecclesiastical Latin) is a JSON library for Scala.
   *
   * We like Circe as opposed to other libraries because it is functional, type-safe and very idiomatic.
   * It integrates very well with the Cats ecosystem.
@@ -21,8 +20,7 @@ import io.circe.syntax._
   */
 object CirceExercises {
 
-  /**
-    * Json Parsing
+  /** Json Parsing
     *
     * Hint: `parser.parse` is already in scope (imported through `io.circe._`)
     *
@@ -32,8 +30,7 @@ object CirceExercises {
     ???
   }
 
-  /**
-    * Try make a syntax error in the following Json document and compile.
+  /** Try make a syntax error in the following Json document and compile.
     * What happens?
     */
   val validJson: Json = {
@@ -49,15 +46,13 @@ object CirceExercises {
 
   case class Person(name: String, age: Int)
 
-  /**
-    * Defining encoders and decoders in the companion object means that Scala will always be able to find them.
+  /** Defining encoders and decoders in the companion object means that Scala will always be able to find them.
     *
     * Note: they may be "shadowed" by a higher priority implicit
     */
   object Person {
 
-    /**
-      * Create an `Encoder` instance for `Person` by implementing the `apply` method below.
+    /** Create an `Encoder` instance for `Person` by implementing the `apply` method below.
       *
       * Make `personEncoder` an `implicit` to avoid having to pass the `Encoder` instance
       * into `asJson` explicitly.
@@ -75,8 +70,7 @@ object CirceExercises {
       ???
     }
 
-    /**
-      * Sometimes you might want several encoders for the same type.
+    /** Sometimes you might want several encoders for the same type.
       *
       * Why can't we define this as implicit as well? How would Scala know which one to pick?
       */
@@ -88,8 +82,7 @@ object CirceExercises {
     }
   }
 
-  /**
-    * Scala will look for an implicit `Encoder[Person]` in the following places:
+  /** Scala will look for an implicit `Encoder[Person]` in the following places:
     *
     * - The current scope (current method, class, file)
     * - Imports
@@ -100,15 +93,13 @@ object CirceExercises {
     person.asJson
   }
 
-  /**
-    * Use `differentPersonEncoder` explicitly to encode the person
+  /** Use `differentPersonEncoder` explicitly to encode the person
     */
   def encodePersonDifferently(person: Person): Json = {
     person.asJson(???)
   }
 
-  /**
-    * Sick of writing custom encoders? You can use "semiauto derivation"
+  /** Sick of writing custom encoders? You can use "semiauto derivation"
     * to create an `Encoder` instance for you using a Scala feature called macros.
     *
     * The downside to this is the keys of your `Json` are now tightly coupled with
@@ -126,12 +117,10 @@ object CirceExercises {
     person.asJson
   }
 
-  /**
-    * Decoding
+  /** Decoding
     */
 
-  /**
-    * Remember: `Result[A]` is an alias for `Either[DecodingFailure, A]`
+  /** Remember: `Result[A]` is an alias for `Either[DecodingFailure, A]`
     *
     * Question: Why is the return type an `Either`?
     *
@@ -169,8 +158,7 @@ object CirceExercises {
     json.as[Person]
   }
 
-  /**
-    * You can use "semiauto derivation" for decoders too.
+  /** You can use "semiauto derivation" for decoders too.
     *
     * Hint: Use deriveDecoder
     */
@@ -182,8 +170,7 @@ object CirceExercises {
     json.as[Person]
   }
 
-  /**
-    * Parse and then decode
+  /** Parse and then decode
     *
     * Hint: Use `parser.decode`, which does both at the same time.
     */

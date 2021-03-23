@@ -15,13 +15,16 @@ class FetchEnrichedMovieServiceSpec extends Specification {
 
       val repo = (movieId: MovieId) => IO.pure(Some(expectedMovie))
 
-      val starRatingsRepo = (movieName: String) => IO.pure(Some(expectedMetascore))
+      val starRatingsRepo =
+        (movieName: String) => IO.pure(Some(expectedMetascore))
 
       val service = new FetchEnrichedMovieService(repo, starRatingsRepo)
 
       val actual = service.fetch(MovieId(123))
 
-      actual.unsafeRunSync() must beSome(EnrichedMovie(expectedMovie, expectedMetascore))
+      actual.unsafeRunSync() must beSome(
+        EnrichedMovie(expectedMovie, expectedMetascore)
+      )
 
     }
 

@@ -6,9 +6,9 @@ import cats.effect.IO
 import cats.implicits._
 
 case class Config(
-  omdbApiKey: String,
-  version: String,
-  databaseConfig: DatabaseConfig
+    omdbApiKey: String,
+    version: String,
+    databaseConfig: DatabaseConfig
 )
 
 object Config {
@@ -22,7 +22,10 @@ object Config {
   def fromEnvironment(): IO[Config] = {
     val env = Environment(sys.env)
     Config(env) match {
-      case Invalid(errors) => IO.raiseError(new IllegalStateException(ConfigError.show(errors.toList)))
+      case Invalid(errors) =>
+        IO.raiseError(
+          new IllegalStateException(ConfigError.show(errors.toList))
+        )
       case Valid(c) => IO.pure(c)
     }
   }

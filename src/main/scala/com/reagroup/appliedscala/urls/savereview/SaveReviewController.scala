@@ -11,15 +11,23 @@ import org.http4s._
 import org.http4s.circe.CirceEntityCodec._
 import org.http4s.dsl.Http4sDsl
 
-class SaveReviewController(saveNewReview: (MovieId, NewReviewRequest) => IO[ValidatedNel[ReviewValidationError, ReviewId]]) extends Http4sDsl[IO] {
+class SaveReviewController(
+    saveNewReview: (
+        MovieId,
+        NewReviewRequest
+    ) => IO[ValidatedNel[ReviewValidationError, ReviewId]]
+) extends Http4sDsl[IO] {
 
   def save(movieId: Long, req: Request[IO]): IO[Response[IO]] = {
     for {
       newReviewRequest <- req.as[NewReviewRequest]
-      eitherValidatedReviewId <- saveNewReview(MovieId(movieId), newReviewRequest).attempt
+      eitherValidatedReviewId <- saveNewReview(
+        MovieId(movieId),
+        newReviewRequest
+      ).attempt
       response <- eitherValidatedReviewId match {
-        case Left(err) => ErrorHandler(err)
-        case Right(Valid(reviewId)) => Created(reviewId)
+        case Left(err)                        => ErrorHandler(err)
+        case Right(Valid(reviewId))           => Created(reviewId)
         case Right(Invalid(validationErrors)) => BadRequest(validationErrors)
       }
 

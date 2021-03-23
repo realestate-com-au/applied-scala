@@ -17,7 +17,8 @@ class PostgresqlRepository(transactor: Transactor[IO]) {
   def fetchMovie(movieId: MovieId): IO[Option[Movie]] = {
 
     def toMovie(rows: Vector[MovieRow]): Option[Movie] = rows.headOption.map {
-      case MovieRow(name, synopsis, _) => Movie(name, synopsis, rows.flatMap(_.review))
+      case MovieRow(name, synopsis, _) =>
+        Movie(name, synopsis, rows.flatMap(_.review))
     }
 
     for {
@@ -33,9 +34,12 @@ class PostgresqlRepository(transactor: Transactor[IO]) {
 
   def fetchAllMovies: IO[Vector[Movie]] = {
 
-    def toMovies(rows: Vector[MovieRow]): Vector[Movie] = rows.groupBy(r => (r.name, r.synopsis)).map {
-      case ((name, synopsis), movieRows) => Movie(name, synopsis, movieRows.flatMap(_.review))
-    }.toVector
+    def toMovies(rows: Vector[MovieRow]): Vector[Movie] = rows
+      .groupBy(r => (r.name, r.synopsis))
+      .map { case ((name, synopsis), movieRows) =>
+        Movie(name, synopsis, movieRows.flatMap(_.review))
+      }
+      .toVector
 
     for {
       rows <- sql"""
@@ -74,7 +78,10 @@ class PostgresqlRepository(transactor: Transactor[IO]) {
 }
 
 object PostgresqlRepository {
-  def apply(config: DatabaseConfig, contextShift: ContextShift[IO]): PostgresqlRepository = {
+  def apply(
+      config: DatabaseConfig,
+      contextShift: ContextShift[IO]
+  ): PostgresqlRepository = {
     val ds = new PGSimpleDataSource()
     ds.setServerNames(Array(config.host))
     ds.setUser(config.username)
@@ -82,7 +89,11 @@ object PostgresqlRepository {
     ds.setDatabaseName(config.databaseName)
 
     implicit val cs: ContextShift[IO] = contextShift
-    val transactor = Transactor.fromDataSource[IO](ds, scala.concurrent.ExecutionContext.global, Blocker.liftExecutionContext(ExecutionContexts.synchronous))
+    val transactor = Transactor.fromDataSource[IO](
+      ds,
+      scala.concurrent.ExecutionContext.global,
+      Blocker.liftExecutionContext(ExecutionContexts.synchronous)
+    )
     new PostgresqlRepository(transactor)
   }
 }
