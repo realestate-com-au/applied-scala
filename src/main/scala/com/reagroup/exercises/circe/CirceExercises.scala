@@ -71,7 +71,7 @@ object CirceExercises {
       * - https://typelevel.org/cats/typeclasses.html
       * - https://www.parsonsmatt.org/2017/01/07/how_do_type_classes_differ_from_interfaces.html
       */
-    implicit val personEncoder: Encoder[Person] = (p: Person) => {
+    implicit val personEncoder: Encoder[Person] = Encoder { (p: Person) =>
       ???
     }
 
@@ -80,7 +80,7 @@ object CirceExercises {
       *
       * Why can't we define this as implicit as well? How would Scala know which one to pick?
       */
-    val differentPersonEncoder: Encoder[Person] = (p: Person) => {
+    val differentPersonEncoder: Encoder[Person] = Encoder { (p: Person) =>
       Json.obj(
         "different_name" -> p.name.asJson,
         "different_age" -> p.age.asJson
