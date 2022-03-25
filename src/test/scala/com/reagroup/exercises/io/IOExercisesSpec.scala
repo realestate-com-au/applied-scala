@@ -1,6 +1,7 @@
 package com.reagroup.exercises.io
 
 import cats.effect.IO
+import cats.effect.unsafe.implicits.global
 import com.reagroup.exercises.io.IOExercises._
 import org.specs2.mutable.Specification
 

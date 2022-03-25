@@ -1,12 +1,13 @@
 package com.reagroup.appliedscala
 
 import cats.effect.IO
-import org.http4s.util.CaseInsensitiveString
-import org.http4s.{Method, Query, Request, Response, Uri}
+import cats.effect.unsafe.implicits.global
+import org.http4s.{Method, Request, Response, Uri}
+import org.typelevel.ci.CIString
 
 object Http4sSpecHelpers {
   def header(response: IO[Response[IO]], headerName: String): Option[String] = {
-    response.unsafeRunSync().headers.get(CaseInsensitiveString(headerName)).map(_.value)
+    response.unsafeRunSync().headers.get(CIString(headerName)).map(_.head.value)
   }
 
   def body(response: IO[Response[IO]]): String = {
@@ -15,7 +16,7 @@ object Http4sSpecHelpers {
   }
 
   def request(path: String, method: Method): Request[IO] = {
-      Request[IO](method = method, uri = Uri(path = path))
+      Request[IO](method = method, uri = Uri(path = Uri.Path.unsafeFromString(path)))
   }
 
   def request(uri: Uri, method: Method): Request[IO] = {

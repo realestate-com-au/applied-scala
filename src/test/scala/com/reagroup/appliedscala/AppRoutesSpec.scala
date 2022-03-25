@@ -1,17 +1,15 @@
 package com.reagroup.appliedscala
 
 import cats.effect.IO
-
+import cats.effect.unsafe.implicits.global
 import com.reagroup.appliedscala.Http4sSpecHelpers._
 import org.http4s._
-import org.http4s.implicits._
 import org.http4s.dsl.Http4sDsl
-import org.http4s.testing.Http4sMatchers
-import org.http4s.testing.IOMatchers
+import org.http4s.implicits._
 import org.specs2.mutable.Specification
 import org.specs2.specification.core.Fragment
 
-class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers[IO] with IOMatchers {
+class AppRoutesSpec extends Specification with Http4sDsl[IO] {
 
   /*
    * We can test our routes independently of our controllers.
@@ -85,7 +83,7 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
       s"for ${req.method} ${req.uri}" in {
 
         "return OK" in {
-          testAppRoutes.openRoutes(req).getOrElse(Response[IO](status = Status.NotFound)) must returnValue(haveStatus(Status.Ok))
+          testAppRoutes.openRoutes(req).getOrElse(Response[IO](status = Status.NotFound)).unsafeRunSync().status must beEqualTo(Status.Ok)
         }
 
         "return expected response" in {

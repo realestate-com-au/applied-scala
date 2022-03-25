@@ -1,6 +1,7 @@
 package com.reagroup.appliedscala.urls.fetchenrichedmovie
 
 import cats.effect.IO
+import cats.effect.unsafe.implicits.global
 import com.reagroup.appliedscala.models._
 import org.specs2.mutable.Specification
 
