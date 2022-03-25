@@ -2,4 +2,4 @@
 
 cd $(dirname $0)/..
 
-auto/dev-environment sbt clean test:compile
+auto/dev-environment sbt clean Test/compile
