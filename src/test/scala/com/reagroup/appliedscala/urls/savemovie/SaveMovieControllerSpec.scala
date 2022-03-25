@@ -1,16 +1,15 @@
 package com.reagroup.appliedscala.urls.savemovie
 
-import cats.data.{NonEmptyList, Validated}
+import cats.data.NonEmptyList
 import cats.effect.IO
+import cats.effect.unsafe.implicits.global
 import cats.implicits._
 import com.reagroup.appliedscala.models._
 import io.circe.literal._
 import org.http4s._
-import org.http4s.testing.Http4sMatchers
-import org.http4s.testing.IOMatchers
 import org.specs2.mutable.Specification
 
-class SaveMovieControllerSpec extends Specification with Http4sMatchers[IO] with IOMatchers {
+class SaveMovieControllerSpec extends Specification {
 
   "when saving a valid movie" should {
 
@@ -30,7 +29,7 @@ class SaveMovieControllerSpec extends Specification with Http4sMatchers[IO] with
 
     "return status code Created" in {
 
-      actual must haveStatus(Status.Created)
+      actual.status must beEqualTo(Status.Created)
 
     }
 
@@ -40,7 +39,7 @@ class SaveMovieControllerSpec extends Specification with Http4sMatchers[IO] with
         json"""
           { "id": 1 }
         """
-      actual must haveBody(expectedJson.noSpaces)
+      actual.as[String].unsafeRunSync() must beEqualTo(expectedJson.noSpaces)
 
     }
 
@@ -66,7 +65,7 @@ class SaveMovieControllerSpec extends Specification with Http4sMatchers[IO] with
 
     "return status code BadRequest" in {
 
-      actual must haveStatus(Status.BadRequest)
+      actual.status must beEqualTo(Status.BadRequest)
 
     }
 
@@ -76,7 +75,7 @@ class SaveMovieControllerSpec extends Specification with Http4sMatchers[IO] with
         json"""
           [ { "error": "MOVIE_NAME_TOO_SHORT" }, { "error": "MOVIE_SYNOPSIS_TOO_SHORT"} ]
         """
-      actual must haveBody(expectedJson.noSpaces)
+      actual.as[String].unsafeRunSync() must beEqualTo(expectedJson.noSpaces)
 
     }
 
