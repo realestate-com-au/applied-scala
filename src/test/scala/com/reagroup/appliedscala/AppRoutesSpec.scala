@@ -42,7 +42,7 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] {
     if (rawMovieId == 123) {
       Ok("got movie 123")
     } else {
-      errorResponse(s"Expected movieId 123, but received $rawMovieId")
+      BadRequest(s"Expected movieId 123, but received $rawMovieId")
     }
   }
 
@@ -50,7 +50,7 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] {
     if (rawMovieId == 123) {
       Ok("got enriched movie 123")
     } else {
-      errorResponse(s"Expected movieId 123, but received $rawMovieId")
+      BadRequest(s"Expected movieId 123, but received $rawMovieId")
     }
   }
 
@@ -60,12 +60,8 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] {
     if (rawMovieId == 456) {
       Ok("review 7 for movie 456 created")
     } else {
-      errorResponse(s"Expected movieId 456, but received $rawMovieId")
+      BadRequest(s"Expected movieId 456, but received $rawMovieId")
     }
-  }
-
-  def errorResponse(message: String): IO[Response[IO]] = {
-    IO.pure(Response(status = InternalServerError.withReason(message)))
   }
 
   "AppRoutes" should {

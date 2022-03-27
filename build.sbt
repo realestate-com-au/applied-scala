@@ -4,7 +4,7 @@ version := "1.0"
 
 scalaVersion := "2.13.8"
 
-mainClass := Some("com.reagroup.appliedscala.Main")
+Compile / run / mainClass := Some("com.reagroup.appliedscala.Main")
 
 val catsVersion = "2.7.0"
 val circeVersion = "0.14.1"
