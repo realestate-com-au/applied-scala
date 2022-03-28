@@ -11,14 +11,15 @@ import cats.effect.IO
   * Unfortunately, by looking at the type signature alone you do not know precisely what side-effect will be carried out.
   *
   * Here is some comprehensive documentation on `IO`:
-  * https://typelevel.org/cats-effect/datatypes/io.html
+  * https://typelevel.org/cats-effect/docs/2.x/datatypes/io
   */
 object IOExercises {
 
   /**
-    * Create an IO which returns the number 43 and strictly evaluates the argument.
+    * Create an IO which returns the number 43 and eagerly (rather than lazily) evaluates the argument.
     *
-    * Hint: You want to look for a function in IO with the type signature A => IO[A]
+    * Hint: You want to look for a function in IO with the type signature A => IO[A].
+    * Here is some relevant documentation https://typelevel.org/cats-effect/docs/2.x/datatypes/io#describing-effects
     */
   def immediatelyExecutingIO(): IO[Int] =
     ???
@@ -51,11 +52,14 @@ object IOExercises {
     */
 
   /**
+    * An IO is a description of a side-effect, ande side-effects can potentially fail. So, we need to ba
+    * able to describe failures.
+    *
     * Create an IO which always fails with a `new Exception()`
     *
     * Do NOT use `throw`
     *
-    * Hint: https://typelevel.org/cats-effect/datatypes/io.html#raiseerror
+    * Hint: https://typelevel.org/cats-effect/docs/2.x/datatypes/io#raiseerror
     */
   def alwaysFailingTask(): IO[Unit] =
     ???
@@ -120,7 +124,7 @@ object IOExercises {
     *
     * If unsuccessful, this program should return the error's message (use `.getMessage`).
     *
-    * Hint: https://typelevel.org/cats-effect/datatypes/io.html#attempt
+    * Hint: https://typelevel.org/cats-effect/docs/2.x/datatypes/io#attempt
     */
   def showCurrentTempInF(currentTemp: IO[Celsius], converter: Celsius => IO[Fahrenheit]): IO[String] =
     ???
@@ -164,7 +168,7 @@ object IOExercises {
     * Finally, we want to learn how to execute an IO. We are not going to need to do this when writing a REST API however,
     * the library will take care of the IO for you.
     *
-    * Hint: https://typelevel.org/cats-effect/datatypes/io.html#unsaferunsync
+    * Hint: https://typelevel.org/cats-effect/docs/2.x/datatypes/io#unsaferunsync
     */
   def execute[A](io: IO[A]): A =
     ???
