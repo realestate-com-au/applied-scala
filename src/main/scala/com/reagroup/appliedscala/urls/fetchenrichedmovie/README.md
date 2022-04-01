@@ -39,6 +39,8 @@ Hint: We want to start by converting the `String` in the response body into a `M
 
 _**Complete exercise**_
 
+_**Run unit test: `Http4sMetascoreRepositorySpec`**_
+
 ### 4. `FetchEnrichedMovieService` (exercise)
 
 Moving on to the `Service`, we can see it has access to _two_ functions. The first one is to fetch a `Movie` and the second is to fetch a `Metascore`. More concretely, the first is the Postgresql database call and the second one is the OMDB API call.
