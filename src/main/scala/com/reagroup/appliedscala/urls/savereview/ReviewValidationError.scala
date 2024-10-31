@@ -4,13 +4,11 @@ import io.circe.Json
 import io.circe.syntax._
 import io.circe.Encoder
 
-sealed trait ReviewValidationError
-
-case object ReviewAuthorTooShort extends ReviewValidationError
-
-case object ReviewCommentTooShort extends ReviewValidationError
-
-case object MovieDoesNotExist extends ReviewValidationError
+enum ReviewValidationError {
+  case ReviewAuthorTooShort
+  case ReviewCommentTooShort
+  case MovieDoesNotExist
+}
 
 object ReviewValidationError {
 

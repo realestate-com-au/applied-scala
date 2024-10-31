@@ -7,4 +7,5 @@ Compile / compile / wartremoverErrors ++= Warts.allBut(
   Wart.NonUnitStatements,
   Wart.Option2Iterable,
   Wart.EitherProjectionPartial,
+  Wart.TripleQuestionMark,
 )

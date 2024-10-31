@@ -1,5 +1,6 @@
 package com.reagroup.appliedscala.urls.savereview
 
+import com.reagroup.appliedscala.urls.savereview.ReviewValidationError.*
 import org.specs2.mutable.Specification
 
 class ReviewValidationErrorSpec extends Specification {
