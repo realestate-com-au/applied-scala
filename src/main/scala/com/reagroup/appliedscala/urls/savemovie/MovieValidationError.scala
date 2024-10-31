@@ -33,7 +33,7 @@ object MovieValidationError {
    * "error": "MOVIE_NAME_TOO_SHORT"
    * }
    */
-  implicit val encoder: Encoder[MovieValidationError] =
+  given Encoder[MovieValidationError] =
     Encoder { err =>
       Json.obj("error" -> MovieValidationError.show(err).asJson)
     }
