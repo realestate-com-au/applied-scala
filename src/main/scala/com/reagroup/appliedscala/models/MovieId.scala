@@ -21,7 +21,7 @@ object MovieId {
    * of the field in `MovieId`
    */
 
-  implicit val encoder: Encoder[MovieId] =
+  given Encoder[MovieId] =
     Encoder { movieId =>
       Json.obj(("id", movieId.value.asJson))
     }

@@ -4,13 +4,11 @@ import io.circe.Json
 import io.circe.syntax._
 import io.circe.Encoder
 
-sealed trait ReviewValidationError
-
-case object ReviewAuthorTooShort extends ReviewValidationError
-
-case object ReviewCommentTooShort extends ReviewValidationError
-
-case object MovieDoesNotExist extends ReviewValidationError
+enum ReviewValidationError {
+  case ReviewAuthorTooShort
+  case ReviewCommentTooShort
+  case MovieDoesNotExist
+}
 
 object ReviewValidationError {
 
@@ -42,7 +40,7 @@ object ReviewValidationError {
     * Hint: You don't want to use `deriveEncoder` here
     */
 
-   implicit val encoder: Encoder[ReviewValidationError] =
+   given Encoder[ReviewValidationError] =
     Encoder { err =>
       Json.obj("error" -> ReviewValidationError.show(err).asJson)
     }

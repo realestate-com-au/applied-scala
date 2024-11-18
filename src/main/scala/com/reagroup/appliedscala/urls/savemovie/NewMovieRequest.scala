@@ -19,6 +19,5 @@ object NewMovieRequest {
     * as the fields in resulting data type.
     */
 
-  implicit val decoder: Decoder[NewMovieRequest] = deriveDecoder
-
+  given Decoder[NewMovieRequest] = deriveDecoder
 }

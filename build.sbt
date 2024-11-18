@@ -2,17 +2,17 @@ name := "applied-scala"
 
 version := "1.0"
 
-scalaVersion := "2.13.8"
+scalaVersion := "3.3.3"
 
 Compile / run / mainClass := Some("com.reagroup.appliedscala.Main")
 
 val catsVersion = "2.7.0"
-val circeVersion = "0.14.1"
+val circeVersion = "0.14.10"
 val http4sVersion = "0.23.11"
 val logbackVersion = "1.2.11"
 val postgresqlVersion = "42.2.4"
 val doobieVersion = "1.0.0-RC1"
-val specs2Version = "4.10.1"
+val specs2Version = "4.20.9"
 
 libraryDependencies ++= Seq(
   "io.circe" %% "circe-core",

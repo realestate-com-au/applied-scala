@@ -20,13 +20,11 @@ object ValidationExercises {
 
   case class Person(firstName: String, lastName: String, password: String)
 
-  sealed trait ValidationError
-
-  case object PasswordTooShort extends ValidationError
-
-  case object PasswordTooWeak extends ValidationError
-
-  case class NameIsEmpty(label: String) extends ValidationError
+  enum ValidationError {
+    case PasswordTooShort
+    case PasswordTooWeak
+    case NameIsEmpty(label: String)
+  }
 
   /**
     * If the `name` is empty, return a `NameIsEmpty(label)` in an `Invalid(NonEmptyList(...)`.

@@ -19,5 +19,5 @@ object NewReviewRequest {
     * as the fields in resulting data type.
     */
 
-    implicit val decoder: Decoder[NewReviewRequest] = deriveDecoder
+    given Decoder[NewReviewRequest] = deriveDecoder
 }

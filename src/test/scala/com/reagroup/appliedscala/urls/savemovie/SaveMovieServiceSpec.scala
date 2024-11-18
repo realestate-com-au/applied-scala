@@ -3,8 +3,9 @@ package com.reagroup.appliedscala.urls.savemovie
 import cats.data.NonEmptyList
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
-import cats.implicits._
-import com.reagroup.appliedscala.models._
+import cats.implicits.*
+import com.reagroup.appliedscala.models.*
+import com.reagroup.appliedscala.urls.savemovie.MovieValidationError.*
 import org.specs2.mutable.Specification
 
 class SaveMovieServiceSpec extends Specification {

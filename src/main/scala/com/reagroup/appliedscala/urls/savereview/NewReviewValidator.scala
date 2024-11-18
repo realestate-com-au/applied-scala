@@ -1,8 +1,9 @@
 package com.reagroup.appliedscala.urls.savereview
 
-import cats.data.Validated._
+import cats.data.Validated.*
 import cats.data.ValidatedNel
-import cats.implicits._
+import cats.implicits.*
+import com.reagroup.appliedscala.urls.savereview.ReviewValidationError.*
 
 object NewReviewValidator {
 
@@ -12,7 +13,7 @@ object NewReviewValidator {
     * Hint: `Validated` has an Applicative instance.
     */
   def validate(review: NewReviewRequest): ValidatedNel[ReviewValidationError, ValidatedReview] =
-    (validateAuthor(review.author), validateComment(review.comment)).mapN(ValidatedReview)
+    (validateAuthor(review.author), validateComment(review.comment)).mapN(ValidatedReview.apply)
 
   /**
     * If `author` is empty, return an `InvalidNel` containing `ReviewAuthorTooShort`,

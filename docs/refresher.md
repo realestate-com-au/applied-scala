@@ -33,6 +33,13 @@ Calling this function multiple times on the same `robot` _always_ gives you the 
 ## Algebraic Data Types (ADTs)
 
 ```scala
+// Scala 3
+enum UserId {
+  case SignedInUserId(value: String)
+  case AnonymousUserId(value: String)
+}
+
+// Scala 2.13 and earlier
 sealed trait UserId // data type 
 
 case class SignedInUserId(value: String) extends UserId // data constructor
