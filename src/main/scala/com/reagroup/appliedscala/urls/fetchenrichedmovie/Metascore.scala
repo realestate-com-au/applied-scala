@@ -25,5 +25,5 @@ object Metascore {
     *
     * `Metascore(75)`
     */
-
+    implicit val decoderMetascore: Decoder[Metascore] = Decoder { metascore => ??? }
 }

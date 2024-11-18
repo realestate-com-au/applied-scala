@@ -29,6 +29,8 @@ We can now implement a `Decoder` instance to convert a `Json` response from OMDB
 
 _**Complete exercise**_
 
+_**Run unit test: `MetascoreSpec`**_
+
 ### 3. `Http4sMetascoreRepository` (exercise)
 
 This has mostly been implemented for you. We use Http4s' `Uri` type to encode the `movieName` so spaces become `%20`, for instance, and then we make a request using an Http4s HTTP Client. 
@@ -36,6 +38,8 @@ This has mostly been implemented for you. We use Http4s' `Uri` type to encode th
 Hint: We want to start by converting the `String` in the response body into a `Metascore`. For the purpose of this exercise, let's convert any failures from Circe into a `None`.
 
 _**Complete exercise**_
+
+_**Run unit test: `Http4sMetascoreRepositorySpec`**_
 
 ### 4. `FetchEnrichedMovieService` (exercise)
 

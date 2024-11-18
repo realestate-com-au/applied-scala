@@ -2,16 +2,16 @@ name := "applied-scala"
 
 version := "1.0"
 
-scalaVersion := "2.13.3"
+scalaVersion := "2.13.8"
 
-mainClass := Some("com.reagroup.appliedscala.Main")
+Compile / run / mainClass := Some("com.reagroup.appliedscala.Main")
 
-val catsVersion = "2.1.1"
-val circeVersion = "0.13.0"
-val http4sVersion = "0.21.6"
-val logbackVersion = "1.2.3"
+val catsVersion = "2.7.0"
+val circeVersion = "0.14.1"
+val http4sVersion = "0.23.11"
+val logbackVersion = "1.2.11"
 val postgresqlVersion = "42.2.4"
-val doobieVersion = "0.8.8"
+val doobieVersion = "1.0.0-RC1"
 val specs2Version = "4.10.1"
 
 libraryDependencies ++= Seq(
@@ -34,10 +34,9 @@ libraryDependencies ++= Seq(
   "org.postgresql"           % "postgresql"             % postgresqlVersion,
   "org.tpolecat"            %% "doobie-core"            % doobieVersion,
   "org.tpolecat"            %% "doobie-postgres"        % doobieVersion,
-  "org.specs2"              %% "specs2-core"            % specs2Version % "test",
-  "org.specs2"              %% "specs2-matcher-extra"   % specs2Version % "test",
-  "org.specs2"              %% "specs2-scalacheck"      % specs2Version % "test",
-  "org.http4s"              %% "http4s-testing"         % http4sVersion % "test",
+  "org.specs2"              %% "specs2-core"            % specs2Version % Test,
+  "org.specs2"              %% "specs2-matcher-extra"   % specs2Version % Test,
+  "org.specs2"              %% "specs2-scalacheck"      % specs2Version % Test
 )
 
 scalacOptions ++= Seq(

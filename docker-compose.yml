@@ -2,7 +2,7 @@ version: "2"
 
 services:
   dev:
-    image: hseeberger/scala-sbt:11.0.7_1.3.13_2.13.3
+    image: hseeberger/scala-sbt:eclipse-temurin-11.0.14.1_1.6.2_2.13.8
     working_dir: /work
     command: sbt run
     environment:

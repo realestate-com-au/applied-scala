@@ -1,10 +1,6 @@
 package com.reagroup.appliedscala
 
-import cats.data.Kleisli
-import cats.effect.IO
-import cats.effect.ContextShift
-import cats.effect.Timer
-import cats.effect.IO
+import cats.effect.{Clock, IO}
 import cats.implicits._
 import com.reagroup.appliedscala.config.Config
 import com.reagroup.appliedscala.urls.repositories.{Http4sMetascoreRepository, PostgresqlRepository}
@@ -16,12 +12,12 @@ import com.reagroup.appliedscala.urls.savereview.{SaveReviewController, SaveRevi
 import org.http4s._
 import org.http4s.client.Client
 
-class AppRuntime(config: Config, httpClient: Client[IO], contextShift: ContextShift[IO], timer: Timer[IO]) {
+class AppRuntime(config: Config, httpClient: Client[IO]) {
 
   /**
    * This is the repository that talks to Postgresql
    */
-  private val pgsqlRepo = PostgresqlRepository(config.databaseConfig, contextShift)
+  private val pgsqlRepo = PostgresqlRepository(config.databaseConfig)
 
   private val http4sMetascoreRepo = new Http4sMetascoreRepository(httpClient, config.omdbApiKey)
 

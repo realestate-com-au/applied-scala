@@ -1,4 +1,4 @@
-wartremoverErrors in (Compile, compile) ++= Warts.allBut(
+Compile / compile / wartremoverErrors ++= Warts.allBut(
   Wart.Nothing,
   Wart.Any,
   Wart.FinalCaseClass,

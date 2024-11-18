@@ -1,17 +1,15 @@
 package com.reagroup.appliedscala
 
 import cats.effect.IO
-
+import cats.effect.unsafe.implicits.global
 import com.reagroup.appliedscala.Http4sSpecHelpers._
 import org.http4s._
-import org.http4s.implicits._
 import org.http4s.dsl.Http4sDsl
-import org.http4s.testing.Http4sMatchers
-import org.http4s.testing.IOMatchers
+import org.http4s.implicits._
 import org.specs2.mutable.Specification
 import org.specs2.specification.core.Fragment
 
-class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers[IO] with IOMatchers {
+class AppRoutesSpec extends Specification with Http4sDsl[IO] {
 
   /*
    * We can test our routes independently of our controllers.
@@ -44,7 +42,7 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
     if (rawMovieId == 123) {
       Ok("got movie 123")
     } else {
-      errorResponse(s"Expected movieId 123, but received $rawMovieId")
+      BadRequest(s"Expected movieId 123, but received $rawMovieId")
     }
   }
 
@@ -52,7 +50,7 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
     if (rawMovieId == 123) {
       Ok("got enriched movie 123")
     } else {
-      errorResponse(s"Expected movieId 123, but received $rawMovieId")
+      BadRequest(s"Expected movieId 123, but received $rawMovieId")
     }
   }
 
@@ -62,12 +60,8 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
     if (rawMovieId == 456) {
       Ok("review 7 for movie 456 created")
     } else {
-      errorResponse(s"Expected movieId 456, but received $rawMovieId")
+      BadRequest(s"Expected movieId 456, but received $rawMovieId")
     }
-  }
-
-  def errorResponse(message: String): IO[Response[IO]] = {
-    IO.pure(Response(status = InternalServerError.withReason(message)))
   }
 
   "AppRoutes" should {
@@ -85,7 +79,7 @@ class AppRoutesSpec extends Specification with Http4sDsl[IO] with Http4sMatchers
       s"for ${req.method} ${req.uri}" in {
 
         "return OK" in {
-          testAppRoutes.openRoutes(req).getOrElse(Response[IO](status = Status.NotFound)) must returnValue(haveStatus(Status.Ok))
+          testAppRoutes.openRoutes(req).getOrElse(Response[IO](status = Status.NotFound)).unsafeRunSync().status must beEqualTo(Status.Ok)
         }
 
         "return expected response" in {

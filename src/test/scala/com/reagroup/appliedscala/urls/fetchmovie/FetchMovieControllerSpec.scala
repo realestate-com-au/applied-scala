@@ -1,14 +1,13 @@
 package com.reagroup.appliedscala.urls.fetchmovie
 
 import cats.effect.IO
+import cats.effect.unsafe.implicits.global
 import com.reagroup.appliedscala.models._
 import io.circe.literal._
 import org.http4s._
-import org.http4s.testing.Http4sMatchers
-import org.http4s.testing.IOMatchers
 import org.specs2.mutable.Specification
 
-class FetchMovieControllerSpec extends Specification with Http4sMatchers[IO] with IOMatchers {
+class FetchMovieControllerSpec extends Specification {
 
   "when fetching a movie that exists" should {
 
@@ -20,7 +19,7 @@ class FetchMovieControllerSpec extends Specification with Http4sMatchers[IO] wit
 
     "return status code OK" in {
 
-      actual must haveStatus(Status.Ok)
+      actual.status must beEqualTo(Status.Ok)
 
     }
 
@@ -30,7 +29,7 @@ class FetchMovieControllerSpec extends Specification with Http4sMatchers[IO] wit
         json"""
           {"name": "badman", "synopsis": "the first in the series", "reviews": [ { "author": "bob", "comment": "great movie" } ] }
         """
-      actual must haveBody(expectedJson.noSpaces)
+      actual.as[String].unsafeRunSync() must beEqualTo(expectedJson.noSpaces)
 
     }
 
@@ -44,7 +43,7 @@ class FetchMovieControllerSpec extends Specification with Http4sMatchers[IO] wit
 
     "return status code NotFound" in {
 
-      actual must haveStatus(Status.NotFound)
+      actual.status must beEqualTo(Status.NotFound)
 
     }
 
@@ -58,7 +57,7 @@ class FetchMovieControllerSpec extends Specification with Http4sMatchers[IO] wit
 
     "return status code InternalServerError" in {
 
-      actual must haveStatus(Status.InternalServerError)
+      actual.status must beEqualTo(Status.InternalServerError)
 
     }
 
@@ -68,7 +67,7 @@ class FetchMovieControllerSpec extends Specification with Http4sMatchers[IO] wit
         json"""
             { "error": "Unexpected error has occurred: unknown error" }
           """
-      actual must haveBody(expectedJson.noSpaces)
+      actual.as[String].unsafeRunSync() must beEqualTo(expectedJson.noSpaces)
 
     }
 
