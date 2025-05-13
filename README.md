@@ -15,7 +15,7 @@ brew install openjdk@17
 2. Before the course, please run the following:
 
 ```
-git clone git@github.com:zendesk/applied-scala.git
+git clone git@github.com:realestate-com-au/applied-scala.git
 cd applied-scala
 ./auto/test
 ./auto/start-local
