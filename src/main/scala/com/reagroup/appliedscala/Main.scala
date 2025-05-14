@@ -8,7 +8,7 @@ object Main extends IOApp.Simple {
 
   override def run: IO[Unit] = {
     for {
-      _ <- IO(println("Starting server"))
+      _ <- IO.println("Starting server")
       _ <- startServer()
     } yield ()
   }

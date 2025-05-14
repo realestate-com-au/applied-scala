@@ -6,11 +6,10 @@
 
 Similar to [Intro to Scala](https://github.com/wjlow/intro-to-scala#pre-requisites)
 
-1. Skip this step if you have already done Intro to Scala on your current machine. If you're going to use [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (Community edition is fine), you need to install Java 11 even if you have a newer version of Java installed.
+1. Skip this step if you have already done Intro to Scala on your current machine. If you're going to use [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (Community edition is fine), you need to install Java 17 even if you have a newer version of Java installed.
 
 ```
-brew tap AdoptOpenJDK/openjdk
-brew cask install adoptopenjdk11
+brew install openjdk@17
 ```
 
 2. Before the course, please run the following:

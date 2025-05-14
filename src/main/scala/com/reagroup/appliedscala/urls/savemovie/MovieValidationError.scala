@@ -4,11 +4,10 @@ import io.circe.Encoder
 import io.circe.Json
 import io.circe.syntax._
 
-sealed trait MovieValidationError
-
-case object MovieNameTooShort extends MovieValidationError
-
-case object MovieSynopsisTooShort extends MovieValidationError
+enum MovieValidationError {
+  case MovieNameTooShort
+  case MovieSynopsisTooShort
+}
 
 object MovieValidationError {
 
@@ -34,7 +33,7 @@ object MovieValidationError {
    * "error": "MOVIE_NAME_TOO_SHORT"
    * }
    */
-  implicit val encoder: Encoder[MovieValidationError] =
+  given Encoder[MovieValidationError] =
     Encoder { err =>
       Json.obj("error" -> MovieValidationError.show(err).asJson)
     }

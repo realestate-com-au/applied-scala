@@ -21,7 +21,7 @@ object ReviewId {
     * of the field in `ReviewId`
     */
 
-  implicit val encoder: Encoder[ReviewId] =
+  given Encoder[ReviewId] =
     Encoder { id =>
       Json.obj("id" -> id.value.asJson)
     }

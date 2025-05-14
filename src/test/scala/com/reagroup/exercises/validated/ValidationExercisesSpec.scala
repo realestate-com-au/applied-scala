@@ -1,9 +1,10 @@
 package com.reagroup.exercises.validated
 
 import org.specs2.mutable.Specification
-import ValidationExercises._
+import ValidationExercises.*
 import cats.data.NonEmptyList
-import cats.data.Validated._
+import cats.data.Validated.*
+import com.reagroup.exercises.validated.ValidationExercises.ValidationError.*
 
 class ValidationExercisesSpec extends Specification {
 

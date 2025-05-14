@@ -1,7 +1,8 @@
 package com.reagroup.appliedscala.urls.savemovie
 
-import cats.data._
-import cats.implicits._
+import cats.data.*
+import cats.implicits.*
+import com.reagroup.appliedscala.urls.savemovie.MovieValidationError.*
 import org.specs2.mutable.Specification
 
 class NewMovieValidatorSpec extends Specification {

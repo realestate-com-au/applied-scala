@@ -71,7 +71,7 @@ object CirceExercises {
       * - https://typelevel.org/cats/typeclasses.html
       * - https://www.parsonsmatt.org/2017/01/07/how_do_type_classes_differ_from_interfaces.html
       */
-    implicit val personEncoder: Encoder[Person] = Encoder { (p: Person) =>
+    given Encoder[Person] = Encoder { (p: Person) =>
       ???
     }
 
@@ -122,7 +122,7 @@ object CirceExercises {
   def encodePersonSemiAuto(person: Person): Json = {
     import io.circe.generic.semiauto._
 
-    implicit val personEncoder: Encoder[Person] = ???
+    given Encoder[Person] = ???
     person.asJson
   }
 
@@ -158,7 +158,7 @@ object CirceExercises {
   def decodePerson(json: Json): Either[DecodingFailure, Person] = {
     import cats.implicits._
 
-    implicit val personDecoder: Decoder[Person] = new Decoder[Person] {
+    given Decoder[Person] = new Decoder[Person] {
       override def apply(cursor: HCursor): Result[Person] = ???
     }
     // note: a lot of boilerplate can be removed. Try pressing alt-enter with your
@@ -177,7 +177,7 @@ object CirceExercises {
   def decodePersonSemiAuto(json: Json): Either[DecodingFailure, Person] = {
     import io.circe.generic.semiauto._
 
-    implicit val personDecoder: Decoder[Person] = ???
+    given Decoder[Person] = ???
 
     json.as[Person]
   }
@@ -190,7 +190,7 @@ object CirceExercises {
   def strToPerson(str: String): Either[Error, Person] = {
     import io.circe.generic.semiauto._
 
-    implicit val personDecoder: Decoder[Person] = ???
+    given Decoder[Person] = ???
 
     ???
   }
